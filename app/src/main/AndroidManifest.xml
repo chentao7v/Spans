@@ -23,6 +23,8 @@
         </activity>
 
         <activity android:name=".simple.PlaceholderActivity" />
+        <activity android:name=".simple.IndexerActivity" />
+        <activity android:name=".simple.PipelineActivity" />
     </application>
 
 </manifest>
