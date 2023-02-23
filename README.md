@@ -24,17 +24,17 @@
 val msg = "对不起，因您已注册的{$$}，我们需要核实您的身份及手机号码信息后注册，请插入对应的手机卡{$$}并打开该改手机卡流量开关哟。注册成功后，此手机号才会仅分配给您使用。"
 
 Spans.placeholder(msg)
-    .color("188****8888", getColor(R.color.teal_200)) // 替换第一次占位符
-    .size(dpToPx(this, 30))
-    .click {
-        Log.i(TAG, "click A ~~~")
-    }
-    .color("199****9999", getColor(R.color.teal_700))	// 替换第二处占位符
-    .click {
-        Log.i(TAG ,"click B B !!!")
-    }
-    .size(dpToPx(this, 25))
-    .inject(tvMsg)
+  .color("188****8888", getColor(R.color.teal_200))
+  .size(dpToPx(this, 30))
+  .click {
+    Log.i(TAG, "click A ~~~")
+  }
+  .color("199****9999", getColor(R.color.teal_700))
+  .click {
+    Log.i(TAG, "click B B !!!")
+  }
+  .size(dpToPx(this, 25))
+  .inject(tvMsg)
 ```
 
 最终效果如下：
@@ -57,11 +57,12 @@ Spans.placeholder(msg)
 
 ```kotlin
 val msg = "这是一段长文字，需要在第12到XXXX20处[12,21)高亮，就撒快递费就开了撒金飞达拉卡萨激发的设计阿吉撒京东客服时间啊复健科洒基放大机洒基放大了刷卡机"
+
 Spans.indexer(msg)
-    .color(getColor(R.color.purple_700), 12, 21) // 区间含头不含尾
-    .bold(12, 21)
-    .size(dpToPx(this, 18), 12, 21)
-    .inject(tvMsg)
+  .color(getColor(R.color.purple_700), 12, 21)
+  .bold(12, 21)
+  .size(dpToPx(this, 18), 12, 21)
+  .inject(tvMsg)
 ```
 
 
@@ -92,20 +93,20 @@ val msg3 = "文本CCCCCCCCCCC"
 val msg4 = "文本DDDDD"
 
 Spans.pipeline()
-    .color(msg1, getColor(R.color.purple_200))
-    .click {
-        Log.d(TAG, "click AAA")
-    }
-    .color(msg2, getColor(R.color.black))
-    .click {
-        Log.d(TAG, "click BBB")
-    }
-    .size(dpToPx(this, 20))
-    .color(msg3, getColor(R.color.teal_200))
-    .bold()
-    .click(msg4) {
-        Log.d(TAG, "click DDD")
-    }
-    .inject(tvMsg)
+  .color(msg1, getColor(R.color.purple_200))
+  .click {
+    Log.d(TAG, "click AAA")
+  }
+  .color(msg2, getColor(R.color.black))
+  .click {
+    Log.d(TAG, "click BBB")
+  }
+  .size(dpToPx(this, 20))
+  .color(msg3, getColor(R.color.teal_200))
+  .bold()
+  .click(msg4) {
+    Log.d(TAG, "click DDD")
+  }
+  .inject(tvMsg)
 ```
 

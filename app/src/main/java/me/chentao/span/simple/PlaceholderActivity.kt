@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import me.chentao.library.span.Spans
 import me.chentao.span.R
@@ -15,41 +14,41 @@ import me.chentao.span.R
  */
 class PlaceholderActivity : AppCompatActivity() {
 
-    companion object {
+  companion object {
 
-        private const val TAG = "Placeholder"
+    private const val TAG = "Placeholder"
 
-        fun launch(context: Context) {
-            val intent = Intent(context, PlaceholderActivity::class.java)
-            context.startActivity(intent)
-        }
+    fun launch(context: Context) {
+      val intent = Intent(context, PlaceholderActivity::class.java)
+      context.startActivity(intent)
     }
+  }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_simple)
+    setContentView(R.layout.activity_simple)
 
-        val tvMsg: TextView = findViewById(R.id.tvMsg)
-        simple(tvMsg)
-    }
+    val tvMsg: TextView = findViewById(R.id.tvMsg)
+    simple(tvMsg)
+  }
 
-    private fun simple(tvMsg: TextView) {
+  private fun simple(tvMsg: TextView) {
 
-        val msg = "对不起，因您已注册的{$$}，我们需要核实您的身份及手机号码信息后注册，请插入对应的手机卡{$$}并打开该改手机卡流量开关哟。注册成功后，此手机号才会仅分配给您使用。"
+    val msg = "对不起，因您已注册的{$$}，我们需要核实您的身份及手机号码信息后注册，请插入对应的手机卡{$$}并打开该改手机卡流量开关哟。注册成功后，此手机号才会仅分配给您使用。"
 
-        Spans.placeholder(msg)
-            .color("188****8888", getColor(R.color.teal_200))
-            .size(dpToPx(this, 30))
-            .click {
-                Log.i(TAG, "click A ~~~")
-            }
-            .color("199****9999", getColor(R.color.teal_700))
-            .click {
-                Log.i(TAG ,"click B B !!!")
-            }
-            .size(dpToPx(this, 25))
-            .inject(tvMsg)
-    }
+    Spans.placeholder(msg)
+      .color("188****8888", getColor(R.color.teal_200))
+      .size(dpToPx(this, 30))
+      .click {
+        Log.i(TAG, "click A ~~~")
+      }
+      .color("199****9999", getColor(R.color.teal_700))
+      .click {
+        Log.i(TAG, "click B B !!!")
+      }
+      .size(dpToPx(this, 25))
+      .inject(tvMsg)
+  }
 
 }
