@@ -3,6 +3,7 @@ package me.chentao.span.simple
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,9 @@ import me.chentao.span.R
 class PlaceholderActivity : AppCompatActivity() {
 
     companion object {
+
+        private const val TAG = "Placeholder"
+
         fun launch(context: Context) {
             val intent = Intent(context, PlaceholderActivity::class.java)
             context.startActivity(intent)
@@ -38,12 +42,13 @@ class PlaceholderActivity : AppCompatActivity() {
             .color("188****8888", getColor(R.color.teal_200))
             .size(dpToPx(this, 30))
             .click {
-                Toast.makeText(this, "click A ~~~", Toast.LENGTH_SHORT).show()
+                Log.i(TAG, "click A ~~~")
             }
             .color("199****9999", getColor(R.color.teal_700))
             .click {
-                Toast.makeText(this, "click bbb ~~~", Toast.LENGTH_SHORT).show()
+                Log.i(TAG ,"click B B !!!")
             }
+            .size(dpToPx(this, 25))
             .inject(tvMsg)
     }
 
