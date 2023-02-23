@@ -4,6 +4,8 @@
 
 
 
+
+
 ## 支持功能
 
 ### 一、占位符替换
@@ -54,13 +56,15 @@ Spans.placeholder(msg)
 源代码：
 
 ```kotlin
-val msg = "这是一段长文字，需要在第12到XXXX20处高亮，就撒快递费就开了撒金飞达拉卡萨激发的设计阿吉撒京东客服时间啊复健科洒基放大机洒基放大了刷卡机"
+val msg = "这是一段长文字，需要在第12到XXXX20处[12,21)高亮，就撒快递费就开了撒金飞达拉卡萨激发的设计阿吉撒京东客服时间啊复健科洒基放大机洒基放大了刷卡机"
 Spans.indexer(msg)
-    .color(getColor(R.color.purple_700), 12, 21) // 区间含头部含尾
+    .color(getColor(R.color.purple_700), 12, 21) // 区间含头不含尾
     .bold(12, 21)
     .size(dpToPx(this, 18), 12, 21)
     .inject(tvMsg)
 ```
+
+
 
 
 
