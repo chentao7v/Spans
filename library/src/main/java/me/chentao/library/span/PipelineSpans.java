@@ -49,6 +49,7 @@ public final class PipelineSpans {
      * 给最近一个 Span 添加点击事件和颜色
      */
     public PipelineSpans click(@ColorInt int color, @Nullable View.OnClickListener listener) {
+        this.clickable = true;
         applySpanForLast(new SpanPipeline.OverlayClickSpan(color, listener));
         return this;
     }

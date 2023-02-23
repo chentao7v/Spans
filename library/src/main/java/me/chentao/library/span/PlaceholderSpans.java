@@ -21,7 +21,7 @@ import java.util.Deque;
  */
 public final class PlaceholderSpans {
 
-    public static final String HOLDER = "$$";
+    public static final String HOLDER = "{$$}";
 
     private final Deque<SpanIndexer.Element> elements;
 
@@ -65,6 +65,7 @@ public final class PlaceholderSpans {
      * 给 "上一行" 文本设置颜色与点击事件
      */
     public PlaceholderSpans click(@ColorInt int color, @Nullable View.OnClickListener listener) {
+        this.clickable = true;
         applySpanForLast(new SpanIndexer.ClickSpan(color, listener));
         return this;
     }
