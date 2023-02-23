@@ -33,5 +33,7 @@ Spans.placeholder(msg)
     .inject(tvMsg)
 ```
 
+最终效果如下：
 
+<img src="./images/img1.png" style="zoom:50%;" />
 
