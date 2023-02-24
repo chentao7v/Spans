@@ -43,12 +43,12 @@ class PlaceholderActivity : AppCompatActivity() {
       .click {
         Log.i(TAG, "click A ~~~")
       }
-      .image(getDrawable(R.drawable.icon_rect), dpToPx(this, 60))
       .color("199****9999", getColor(R.color.teal_700))
       .click {
         Log.i(TAG, "click B B !!!")
       }
       .size(dpToPx(this, 25))
+      .image(getDrawable(R.drawable.icon_rect), dpToPx(this, 60))
       .inject(tvMsg)
   }
 

@@ -75,7 +75,7 @@ public class FixedSizeImageSpan extends ImageSpan {
       Log.i("UUUUU", "origin font metrics -> " + fontMetrics.toString());
 
       // 字高
-      int fontHeight = fontMetrics.descent - fontMetrics.ascent;
+      int fontHeight = fontMetrics.bottom - fontMetrics.top;
       // Drawable 高度
       int drawableHeight = rect.height();
 
@@ -85,10 +85,9 @@ public class FixedSizeImageSpan extends ImageSpan {
         fm.ascent = centerY - drawableHeight / 2;
         fm.descent = centerY + drawableHeight / 2;
       } else if (verticalAlign == VERTICAL_ALIGN_BASELINE) {
-        int top = (int) (drawableHeight / (1 + (Math.abs(fontMetrics.bottom / (fontMetrics.top * 1.0f)))));
-        int bottom = drawableHeight - top;
-        fm.ascent = top * -1;
-        fm.descent = bottom;
+        float topPercent = Math.abs(fontMetrics.top) / (fontHeight * 1.f);
+        fm.ascent = (int) (drawableHeight * topPercent * -1);
+        fm.descent = (int) (drawableHeight * (1 - topPercent));
       } else {
         fm.descent = fontMetrics.descent;
         fm.ascent = fontMetrics.descent - drawableHeight;
