@@ -21,12 +21,14 @@ import java.util.Deque;
  */
 public final class PlaceholderSpans {
 
-    public static final String HOLDER = "{$$}";
+    public static final String HOLDER = "{$}";
 
     private final Deque<SpanIndexer.Element> elements;
 
     @NonNull
     private StringBuilder source;
+
+    private int startIndex = 0;
 
     private boolean clickable = false;
 
@@ -125,10 +127,11 @@ public final class PlaceholderSpans {
      * 处理头部的占位符
      */
     private void handleHeadPlaceHolder(String data, SpanIndexer indexer) {
-        int index = source.indexOf(HOLDER);
+        int index = source.indexOf(HOLDER, startIndex);
         if (index == -1) {
             return;
         }
+        startIndex = index;
         source = source.replace(index, index + HOLDER.length(), data);
         elements.add(new SpanIndexer.Element(indexer, index, data.length()));
     }
