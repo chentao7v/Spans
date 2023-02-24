@@ -95,19 +95,19 @@ public interface SpanIndexer {
   class SizeImageSpan implements SpanIndexer {
 
     @NonNull
-    private final FixedSizeImageSpan image;
+    private final AlignImageSpan image;
 
-    public SizeImageSpan(@NonNull Bitmap bitmap, int width, @FixedSizeImageSpan.VerticalAlign int verticalAlign) {
-      image = new FixedSizeImageSpan(bitmap, width, verticalAlign);
+    public SizeImageSpan(@NonNull Bitmap bitmap, int width, @AlignImageSpan.VerticalAlign int verticalAlign) {
+      image = new AlignImageSpan(bitmap, verticalAlign);
     }
 
-    public SizeImageSpan(@NonNull Drawable drawable, int width, @FixedSizeImageSpan.VerticalAlign int verticalAlign) {
-      image = new FixedSizeImageSpan(drawable, width, verticalAlign);
+    public SizeImageSpan(@NonNull Drawable drawable, int width, @AlignImageSpan.VerticalAlign int verticalAlign) {
+      image = new AlignImageSpan(drawable, verticalAlign);
     }
 
     @Override
     public void apply(Spannable spannable, int start, int end) {
-      image.refreshSize();
+      image.setBounds();
       spannable.setSpan(image, start, end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
     }
   }

@@ -21,7 +21,7 @@ import java.lang.ref.WeakReference;
  * <br>
  * create by chentao on 2023-02-24.
  */
-public class FixedSizeImageSpan extends ImageSpan {
+public class AlignImageSpan extends ImageSpan {
 
   public static final int VERTICAL_ALIGN_BOTTOM = 0;
   public static final int VERTICAL_ALIGN_BASELINE = 1;
@@ -33,29 +33,42 @@ public class FixedSizeImageSpan extends ImageSpan {
 
   private WeakReference<Drawable> mDrawableRef;
 
-  private final int width;
   @VerticalAlign
   private final int verticalAlign;
 
-  public FixedSizeImageSpan(@NonNull Bitmap b, int width, @VerticalAlign int verticalAlign) {
-    super(b);
-    this.width = width;
+  public AlignImageSpan(@NonNull Bitmap bitmap, @VerticalAlign int verticalAlign) {
+    super(bitmap);
     this.verticalAlign = verticalAlign;
   }
 
-  public FixedSizeImageSpan(@NonNull Drawable drawable, int width, @VerticalAlign int verticalAlign) {
+  public AlignImageSpan(@NonNull Drawable drawable, @VerticalAlign int verticalAlign) {
     super(drawable);
-    this.width = width;
     this.verticalAlign = verticalAlign;
   }
 
-  public void refreshSize() {
+  public void setBounds() {
     Drawable b = getCachedDrawable();
     if (b == null) {
       return;
     }
 
-    int height = b.getMinimumHeight() / b.getIntrinsicWidth() * width;
+    int width = b.getIntrinsicWidth();
+    int height = b.getMinimumHeight();
+    setBounds(b, width, height);
+  }
+
+  public void setScaleBounds(int width) {
+    Drawable b = getCachedDrawable();
+    if (b == null) {
+      return;
+    }
+
+    int realWidth = width;
+    int realHeight = (int) (b.getIntrinsicHeight() * width / (b.getIntrinsicWidth() * 1.f) + 0.5f);
+    setBounds(b, realWidth, realHeight);
+  }
+
+  private void setBounds(Drawable b, int width, int height) {
     b.setBounds(0, 0, width, height);
   }
 
