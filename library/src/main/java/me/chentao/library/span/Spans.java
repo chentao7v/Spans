@@ -16,7 +16,7 @@ public final class Spans {
   private Spans() {}
 
   /**
-   * 通过流水线的方式设置 Span。
+   * 通过流水线依次拼接的方式设置 Span。
    *
    * @see SpliceSpanFlow
    */
