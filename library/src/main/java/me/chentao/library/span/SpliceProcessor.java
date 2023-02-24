@@ -21,13 +21,13 @@ public interface SpliceProcessor<T, R> {
   /**
    * 给传入的 {@link CharSequence} 设置新的 Span 的类
    */
-  abstract class NewSequenceProcessor implements SpliceProcessor<CharSequence, Spannable> {}
+  abstract class NewSpliceProcessor implements SpliceProcessor<CharSequence, Spannable> {}
 
-  final class ColorProcessor extends NewSequenceProcessor {
+  final class Color extends NewSpliceProcessor {
 
     public final int color;
 
-    public ColorProcessor(@ColorInt int color) {
+    public Color(@ColorInt int color) {
       this.color = color;
     }
 
@@ -39,13 +39,13 @@ public interface SpliceProcessor<T, R> {
     }
   }
 
-  final class ClickProcessor extends NewSequenceProcessor {
+  final class Click extends NewSpliceProcessor {
 
     @NonNull
     private final OverlayProcessor click;
 
-    public ClickProcessor(@ColorInt int color, @Nullable View.OnClickListener listener) {
-      this.click = new OverlayClickProcessor(color, listener);
+    public Click(@ColorInt int color, @Nullable View.OnClickListener listener) {
+      this.click = new OverlayClick(color, listener);
     }
 
     @Override
@@ -59,7 +59,7 @@ public interface SpliceProcessor<T, R> {
    */
   abstract class OverlayProcessor implements SpliceProcessor<Spannable, Spannable> {}
 
-  final class BoldProcessor extends OverlayProcessor {
+  final class Bold extends OverlayProcessor {
 
     @Override
     public Spannable apply(Spannable source) {
@@ -68,11 +68,11 @@ public interface SpliceProcessor<T, R> {
     }
   }
 
-  final class SizeProcessor extends OverlayProcessor {
+  final class Size extends OverlayProcessor {
 
     private final int size;
 
-    public SizeProcessor(int size) {
+    public Size(int size) {
       this.size = size;
     }
 
@@ -83,14 +83,14 @@ public interface SpliceProcessor<T, R> {
     }
   }
 
-  final class OverlayClickProcessor extends OverlayProcessor {
+  final class OverlayClick extends OverlayProcessor {
 
     @ColorInt
     public final int color;
 
     private final View.OnClickListener listener;
 
-    public OverlayClickProcessor(@ColorInt int color, @Nullable View.OnClickListener listener) {
+    public OverlayClick(@ColorInt int color, @Nullable View.OnClickListener listener) {
       this.color = color;
       this.listener = listener;
     }

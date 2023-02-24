@@ -31,7 +31,7 @@ public final class IndexerSpanFlow {
    * 给指定区间 [start,end) 的文本设置颜色
    */
   public IndexerSpanFlow color(@ColorInt int color, int start, int end) {
-    new IndexerProcessor.ColorProcessor(color).apply(spannable, start, end);
+    new IndexerProcessor.Color(color).apply(spannable, start, end);
     return this;
   }
 
@@ -40,7 +40,7 @@ public final class IndexerSpanFlow {
    */
   public IndexerSpanFlow click(@ColorInt int color, int start, int end, @Nullable View.OnClickListener listener) {
     clickable = true;
-    new IndexerProcessor.ClickProcessor(color, listener).apply(spannable, start, end);
+    new IndexerProcessor.Click(color, listener).apply(spannable, start, end);
     return this;
   }
 
@@ -55,7 +55,7 @@ public final class IndexerSpanFlow {
    * 指定区间 [start,end) 的文本的文字大小
    */
   public IndexerSpanFlow size(@Px int size, int start, int end) {
-    new IndexerProcessor.SizeProcessor(size).apply(spannable, start, end);
+    new IndexerProcessor.Size(size).apply(spannable, start, end);
     return this;
   }
 
@@ -63,7 +63,7 @@ public final class IndexerSpanFlow {
    * 对指定区间 [start,end) 的文本加粗
    */
   public IndexerSpanFlow bold(int start, int end) {
-    new IndexerProcessor.BoldProcessor().apply(spannable, start, end);
+    new IndexerProcessor.Bold().apply(spannable, start, end);
     return this;
   }
 

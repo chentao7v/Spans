@@ -45,7 +45,7 @@ public final class PlaceholderSpanFlow {
    * @param data 替换占位符的文本
    */
   public PlaceholderSpanFlow color(String data, @ColorInt int color) {
-    handleHeadPlaceHolder(data, new IndexerProcessor.ColorProcessor(color));
+    handleHeadPlaceHolder(data, new IndexerProcessor.Color(color));
     return this;
   }
 
@@ -54,7 +54,7 @@ public final class PlaceholderSpanFlow {
    */
   public PlaceholderSpanFlow click(String data, @ColorInt int color, @Nullable View.OnClickListener listener) {
     this.clickable = true;
-    handleHeadPlaceHolder(data, new IndexerProcessor.ClickProcessor(color, listener));
+    handleHeadPlaceHolder(data, new IndexerProcessor.Click(color, listener));
     return this;
   }
 
@@ -70,7 +70,7 @@ public final class PlaceholderSpanFlow {
    */
   public PlaceholderSpanFlow click(@ColorInt int color, @Nullable View.OnClickListener listener) {
     this.clickable = true;
-    applySpanForLast(new IndexerProcessor.ClickProcessor(color, listener));
+    applySpanForLast(new IndexerProcessor.Click(color, listener));
     return this;
   }
 
@@ -90,7 +90,7 @@ public final class PlaceholderSpanFlow {
    * 将 "上一行" 文本加粗
    */
   public PlaceholderSpanFlow bold() {
-    applySpanForLast(new IndexerProcessor.BoldProcessor());
+    applySpanForLast(new IndexerProcessor.Bold());
     return this;
   }
 
@@ -98,7 +98,7 @@ public final class PlaceholderSpanFlow {
    * 给 "上一行" 文本设置大小
    */
   public PlaceholderSpanFlow size(@Px int size) {
-    applySpanForLast(new IndexerProcessor.SizeProcessor(size));
+    applySpanForLast(new IndexerProcessor.Size(size));
     return this;
   }
 
@@ -107,12 +107,12 @@ public final class PlaceholderSpanFlow {
    */
   public PlaceholderSpanFlow image(Drawable drawable, @Px int size) {
     // 添加一个空文本
-    handleHeadPlaceHolder(" ", new IndexerProcessor.AbsoluteImageProcessor(drawable, size, AlignImageSpan.VERTICAL_ALIGN_CENTER));
+    handleHeadPlaceHolder(" ", new IndexerProcessor.AbsoluteImage(drawable, size, AlignImageSpan.VERTICAL_ALIGN_CENTER));
     return this;
   }
 
   public PlaceholderSpanFlow image(Bitmap bitmap, @Px int size) {
-    handleHeadPlaceHolder(" ", new IndexerProcessor.AbsoluteImageProcessor(bitmap, size, AlignImageSpan.VERTICAL_ALIGN_BASELINE));
+    handleHeadPlaceHolder(" ", new IndexerProcessor.AbsoluteImage(bitmap, size, AlignImageSpan.VERTICAL_ALIGN_BASELINE));
     return this;
   }
 

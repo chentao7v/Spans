@@ -23,11 +23,11 @@ import java.util.Collection;
  */
 public interface IndexerProcessor {
 
-  final class ColorProcessor implements IndexerProcessor {
+  final class Color implements IndexerProcessor {
     @ColorInt
     private final int color;
 
-    public ColorProcessor(int color) {
+    public Color(int color) {
       this.color = color;
     }
 
@@ -37,7 +37,7 @@ public interface IndexerProcessor {
     }
   }
 
-  final class ClickProcessor implements IndexerProcessor {
+  final class Click implements IndexerProcessor {
 
     @ColorInt
     private final int color;
@@ -45,7 +45,7 @@ public interface IndexerProcessor {
     @Nullable
     private final View.OnClickListener listener;
 
-    public ClickProcessor(int color, @Nullable View.OnClickListener listener) {
+    public Click(int color, @Nullable View.OnClickListener listener) {
       this.color = color;
       this.listener = listener;
     }
@@ -70,7 +70,7 @@ public interface IndexerProcessor {
     }
   }
 
-  final class BoldProcessor implements IndexerProcessor {
+  final class Bold implements IndexerProcessor {
 
     @Override
     public void apply(Spannable spannable, int start, int end) {
@@ -78,11 +78,11 @@ public interface IndexerProcessor {
     }
   }
 
-  final class SizeProcessor implements IndexerProcessor {
+  final class Size implements IndexerProcessor {
 
     private final int size;
 
-    public SizeProcessor(int size) {
+    public Size(int size) {
       this.size = size;
     }
 
@@ -92,19 +92,19 @@ public interface IndexerProcessor {
     }
   }
 
-  class AbsoluteImageProcessor implements IndexerProcessor {
+  class AbsoluteImage implements IndexerProcessor {
 
     @NonNull
     private final AlignImageSpan image;
 
     private final int width;
 
-    public AbsoluteImageProcessor(@NonNull Bitmap bitmap, int width, @AlignImageSpan.VerticalAlign int verticalAlign) {
+    public AbsoluteImage(@NonNull Bitmap bitmap, int width, @AlignImageSpan.VerticalAlign int verticalAlign) {
       image = new AlignImageSpan(bitmap, verticalAlign);
       this.width = width;
     }
 
-    public AbsoluteImageProcessor(@NonNull Drawable drawable, int width, @AlignImageSpan.VerticalAlign int verticalAlign) {
+    public AbsoluteImage(@NonNull Drawable drawable, int width, @AlignImageSpan.VerticalAlign int verticalAlign) {
       image = new AlignImageSpan(drawable, verticalAlign);
       this.width = width;
     }

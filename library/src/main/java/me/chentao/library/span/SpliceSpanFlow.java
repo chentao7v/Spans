@@ -34,7 +34,7 @@ public final class SpliceSpanFlow {
    */
   public SpliceSpanFlow click(CharSequence source, @ColorInt int color, @Nullable View.OnClickListener listener) {
     this.clickable = true;
-    spans.add(new SpliceProcessor.ClickProcessor(color, listener).apply(source));
+    spans.add(new SpliceProcessor.Click(color, listener).apply(source));
     return this;
   }
 
@@ -50,7 +50,7 @@ public final class SpliceSpanFlow {
    */
   public SpliceSpanFlow click(@ColorInt int color, @Nullable View.OnClickListener listener) {
     this.clickable = true;
-    applySpanForLast(new SpliceProcessor.OverlayClickProcessor(color, listener));
+    applySpanForLast(new SpliceProcessor.OverlayClick(color, listener));
     return this;
   }
 
@@ -65,7 +65,7 @@ public final class SpliceSpanFlow {
    * 给指定的 {@link CharSequence} 添加设置颜色
    */
   public SpliceSpanFlow color(CharSequence source, @ColorInt int color) {
-    spans.add(new SpliceProcessor.ColorProcessor(color).apply(source));
+    spans.add(new SpliceProcessor.Color(color).apply(source));
     return this;
   }
 
@@ -73,7 +73,7 @@ public final class SpliceSpanFlow {
    * 对最近的一个 Span 进行加粗
    */
   public SpliceSpanFlow bold() {
-    applySpanForLast(new SpliceProcessor.BoldProcessor());
+    applySpanForLast(new SpliceProcessor.Bold());
     return this;
   }
 
@@ -81,7 +81,7 @@ public final class SpliceSpanFlow {
    * 最近一个 Span 设置指定大小
    */
   public SpliceSpanFlow size(@Px int size) {
-    applySpanForLast(new SpliceProcessor.SizeProcessor(size));
+    applySpanForLast(new SpliceProcessor.Size(size));
     return this;
   }
 
