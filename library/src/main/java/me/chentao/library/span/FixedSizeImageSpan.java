@@ -90,8 +90,8 @@ public class FixedSizeImageSpan extends ImageSpan {
         fm.ascent = top * -1;
         fm.descent = bottom;
       } else {
-        fm.ascent = centerY + fontMetrics.bottom + drawableHeight;
-        fm.descent = centerY + fontMetrics.bottom;
+        fm.descent = fontMetrics.descent;
+        fm.ascent = fontMetrics.descent - drawableHeight;
       }
 
       fm.top = fm.ascent;
