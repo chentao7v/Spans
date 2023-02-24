@@ -1,5 +1,6 @@
 package me.chentao.library.span;
 
+import android.graphics.drawable.Drawable;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.view.View;
@@ -97,6 +98,12 @@ public final class PlaceholderSpans {
    */
   public PlaceholderSpans size(@Px int size) {
     applySpanForLast(new SpanIndexer.SizeSpan(size));
+    return this;
+  }
+
+  public PlaceholderSpans image(Drawable drawable, @Px int size) {
+    // 添加一个空文本
+    handleHeadPlaceHolder(" ", new SpanIndexer.VerticalSizeImageSpan(drawable, size));
     return this;
   }
 

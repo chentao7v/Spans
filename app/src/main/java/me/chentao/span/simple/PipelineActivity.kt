@@ -35,9 +35,9 @@ class PipelineActivity : AppCompatActivity() {
 
   private fun simple(tvMsg: TextView) {
 
-    val msg1 = "文本AAAA"
-    val msg2 = "文本BBBBBBB"
-    val msg3 = "文本CCCCCCCCCCC"
+    val msg1 = "文本AAAA\n"
+    val msg2 = "文本BBBBBBB\n"
+    val msg3 = "文本CCCCCCCCCCC\n"
     val msg4 = "文本DDDDD"
 
     Spans.pipeline()

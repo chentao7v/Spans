@@ -1,6 +1,8 @@
 package me.chentao.library.span;
 
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextPaint;
@@ -87,6 +89,26 @@ public interface SpanIndexer {
     @Override
     public void apply(Spannable spannable, int start, int end) {
       spannable.setSpan(new AbsoluteSizeSpan(size), start, end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+    }
+  }
+
+  class VerticalSizeImageSpan implements SpanIndexer {
+
+    @NonNull
+    private final VerticalImageSpan image;
+
+    public VerticalSizeImageSpan(@NonNull Bitmap bitmap, int width) {
+      image = new VerticalImageSpan(bitmap, width);
+    }
+
+    public VerticalSizeImageSpan(@NonNull Drawable drawable, int width) {
+      image = new VerticalImageSpan(drawable, width);
+    }
+
+    @Override
+    public void apply(Spannable spannable, int start, int end) {
+      image.refreshSize();
+      spannable.setSpan(image, start, end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
     }
   }
 
