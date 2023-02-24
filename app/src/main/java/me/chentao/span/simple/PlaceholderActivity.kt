@@ -7,7 +7,6 @@ import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import me.chentao.library.span.Spans
-import me.chentao.span.IMAGE_URL
 import me.chentao.span.R
 
 /**
@@ -49,7 +48,7 @@ class PlaceholderActivity : AppCompatActivity() {
         Log.i(TAG, "click B B !!!")
       }
       .size(25.dp)
-      .dynamicImage(GlideImageLoader(), IMAGE_URL, 80.dp)
+      .image(drawableRes(R.drawable.mini_icon1), 80.dp)
       .inject(tvMsg)
   }
 
