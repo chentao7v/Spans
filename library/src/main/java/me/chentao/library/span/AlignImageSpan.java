@@ -15,9 +15,11 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
 
 /**
- * 固定图片宽度的 Span。
- * <br>
- * 图标高度会根据图片的宽高比自动计算
+ * 支持自动对齐的 {@link ImageSpan}。
+ * 对齐方式有一下三种：
+ * <br>{@link #VERTICAL_ALIGN_BASELINE} 图片和文字的 baseline 对齐，对齐时也模拟了图片的 baseline；
+ * <br>{@link #VERTICAL_ALIGN_BOTTOM} 图片的底部和文字的底部对齐
+ * <br>{@link #VERTICAL_ALIGN_BOTTOM} 图片的文字居中对齐
  * <br>
  * create by chentao on 2023-02-24.
  */
