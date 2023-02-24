@@ -21,13 +21,13 @@ import java.util.Collection;
  * <br>
  * create by chentao on 2023-02-23.
  */
-public interface SpanIndexer {
+public interface IndexerProcessor {
 
-  final class ColorSpan implements SpanIndexer {
+  final class ColorProcessor implements IndexerProcessor {
     @ColorInt
     private final int color;
 
-    public ColorSpan(int color) {
+    public ColorProcessor(int color) {
       this.color = color;
     }
 
@@ -37,7 +37,7 @@ public interface SpanIndexer {
     }
   }
 
-  final class ClickSpan implements SpanIndexer {
+  final class ClickProcessor implements IndexerProcessor {
 
     @ColorInt
     private final int color;
@@ -45,7 +45,7 @@ public interface SpanIndexer {
     @Nullable
     private final View.OnClickListener listener;
 
-    public ClickSpan(int color, @Nullable View.OnClickListener listener) {
+    public ClickProcessor(int color, @Nullable View.OnClickListener listener) {
       this.color = color;
       this.listener = listener;
     }
@@ -70,7 +70,7 @@ public interface SpanIndexer {
     }
   }
 
-  final class BoldSpan implements SpanIndexer {
+  final class BoldProcessor implements IndexerProcessor {
 
     @Override
     public void apply(Spannable spannable, int start, int end) {
@@ -78,11 +78,11 @@ public interface SpanIndexer {
     }
   }
 
-  final class SizeSpan implements SpanIndexer {
+  final class SizeProcessor implements IndexerProcessor {
 
     private final int size;
 
-    public SizeSpan(int size) {
+    public SizeProcessor(int size) {
       this.size = size;
     }
 
@@ -92,19 +92,19 @@ public interface SpanIndexer {
     }
   }
 
-  class AbsoluteSizeImageSpan implements SpanIndexer {
+  class AbsoluteImageProcessor implements IndexerProcessor {
 
     @NonNull
     private final AlignImageSpan image;
 
     private final int width;
 
-    public AbsoluteSizeImageSpan(@NonNull Bitmap bitmap, int width, @AlignImageSpan.VerticalAlign int verticalAlign) {
+    public AbsoluteImageProcessor(@NonNull Bitmap bitmap, int width, @AlignImageSpan.VerticalAlign int verticalAlign) {
       image = new AlignImageSpan(bitmap, verticalAlign);
       this.width = width;
     }
 
-    public AbsoluteSizeImageSpan(@NonNull Drawable drawable, int width, @AlignImageSpan.VerticalAlign int verticalAlign) {
+    public AbsoluteImageProcessor(@NonNull Drawable drawable, int width, @AlignImageSpan.VerticalAlign int verticalAlign) {
       image = new AlignImageSpan(drawable, verticalAlign);
       this.width = width;
     }
@@ -122,9 +122,9 @@ public interface SpanIndexer {
   class Element {
     private final int start;
     private final int length;
-    private final SpanIndexer indexer;
+    private final IndexerProcessor indexer;
 
-    public Element(SpanIndexer indexer, int start, int length) {
+    public Element(IndexerProcessor indexer, int start, int length) {
       this.indexer = indexer;
       this.start = start;
       this.length = length;
@@ -142,7 +142,7 @@ public interface SpanIndexer {
       return length;
     }
 
-    public SpanIndexer getIndexer() {
+    public IndexerProcessor getIndexer() {
       return indexer;
     }
   }
@@ -159,7 +159,7 @@ public interface SpanIndexer {
    */
   static void applyAll(Spannable spannable, Collection<Element> elements) {
     for (Element element : elements) {
-      SpanIndexer indexer = element.getIndexer();
+      IndexerProcessor indexer = element.getIndexer();
       int start = element.getStart();
       int end = element.getEnd();
       indexer.apply(spannable, start, end);

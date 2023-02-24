@@ -95,7 +95,7 @@ val msg2 = "文本BBBBBBB"
 val msg3 = "文本CCCCCCCCCCC"
 val msg4 = "文本DDDDD"
 
-Spans.pipeline()
+Spans.sequence()
   .color(msg1, getColor(R.color.purple_200))
   .click {
     Log.d(TAG, "click AAA")

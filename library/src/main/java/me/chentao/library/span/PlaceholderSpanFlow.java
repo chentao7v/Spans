@@ -21,11 +21,11 @@ import java.util.Deque;
  * <br>
  * create by chentao on 2023-02-23.
  */
-public final class PlaceholderSpans {
+public final class PlaceholderSpanFlow {
 
   public static final String HOLDER = "{$}";
 
-  private final Deque<SpanIndexer.Element> elements;
+  private final Deque<IndexerProcessor.Element> elements;
 
   @NonNull
   private StringBuilder source;
@@ -34,7 +34,7 @@ public final class PlaceholderSpans {
 
   private boolean clickable = false;
 
-  PlaceholderSpans(@NonNull String source) {
+  PlaceholderSpanFlow(@NonNull String source) {
     this.source = new StringBuilder(source);
     this.elements = new ArrayDeque<>();
   }
@@ -44,44 +44,44 @@ public final class PlaceholderSpans {
    *
    * @param data 替换占位符的文本
    */
-  public PlaceholderSpans color(String data, @ColorInt int color) {
-    handleHeadPlaceHolder(data, new SpanIndexer.ColorSpan(color));
+  public PlaceholderSpanFlow color(String data, @ColorInt int color) {
+    handleHeadPlaceHolder(data, new IndexerProcessor.ColorProcessor(color));
     return this;
   }
 
   /**
    * 用指定的的文本替换占位符，并给该部分文字设置颜色与点击事件
    */
-  public PlaceholderSpans click(String data, @ColorInt int color, @Nullable View.OnClickListener listener) {
+  public PlaceholderSpanFlow click(String data, @ColorInt int color, @Nullable View.OnClickListener listener) {
     this.clickable = true;
-    handleHeadPlaceHolder(data, new SpanIndexer.ClickSpan(color, listener));
+    handleHeadPlaceHolder(data, new IndexerProcessor.ClickProcessor(color, listener));
     return this;
   }
 
   /**
    * 用指定的的文本替换占位符，并给该部分文字设置点击事件
    */
-  public PlaceholderSpans click(String data, @Nullable View.OnClickListener listener) {
+  public PlaceholderSpanFlow click(String data, @Nullable View.OnClickListener listener) {
     return click(data, -1, listener);
   }
 
   /**
    * 给 "上一行" 文本设置颜色与点击事件
    */
-  public PlaceholderSpans click(@ColorInt int color, @Nullable View.OnClickListener listener) {
+  public PlaceholderSpanFlow click(@ColorInt int color, @Nullable View.OnClickListener listener) {
     this.clickable = true;
-    applySpanForLast(new SpanIndexer.ClickSpan(color, listener));
+    applySpanForLast(new IndexerProcessor.ClickProcessor(color, listener));
     return this;
   }
 
   /**
    * 给 "上一行" 设置点击事件
    */
-  public PlaceholderSpans click(@Nullable View.OnClickListener listener) {
+  public PlaceholderSpanFlow click(@Nullable View.OnClickListener listener) {
     return click(-1, listener);
   }
 
-  public PlaceholderSpans clickable() {
+  public PlaceholderSpanFlow clickable() {
     this.clickable = true;
     return this;
   }
@@ -89,39 +89,39 @@ public final class PlaceholderSpans {
   /**
    * 将 "上一行" 文本加粗
    */
-  public PlaceholderSpans bold() {
-    applySpanForLast(new SpanIndexer.BoldSpan());
+  public PlaceholderSpanFlow bold() {
+    applySpanForLast(new IndexerProcessor.BoldProcessor());
     return this;
   }
 
   /**
    * 给 "上一行" 文本设置大小
    */
-  public PlaceholderSpans size(@Px int size) {
-    applySpanForLast(new SpanIndexer.SizeSpan(size));
+  public PlaceholderSpanFlow size(@Px int size) {
+    applySpanForLast(new IndexerProcessor.SizeProcessor(size));
     return this;
   }
 
   /**
    * 用指定的图片替换替换占位符
    */
-  public PlaceholderSpans image(Drawable drawable, @Px int size) {
+  public PlaceholderSpanFlow image(Drawable drawable, @Px int size) {
     // 添加一个空文本
-    handleHeadPlaceHolder(" ", new SpanIndexer.AbsoluteSizeImageSpan(drawable, size, AlignImageSpan.VERTICAL_ALIGN_CENTER));
+    handleHeadPlaceHolder(" ", new IndexerProcessor.AbsoluteImageProcessor(drawable, size, AlignImageSpan.VERTICAL_ALIGN_CENTER));
     return this;
   }
 
-  public PlaceholderSpans image(Bitmap bitmap, @Px int size) {
-    handleHeadPlaceHolder(" ", new SpanIndexer.AbsoluteSizeImageSpan(bitmap, size, AlignImageSpan.VERTICAL_ALIGN_BASELINE));
+  public PlaceholderSpanFlow image(Bitmap bitmap, @Px int size) {
+    handleHeadPlaceHolder(" ", new IndexerProcessor.AbsoluteImageProcessor(bitmap, size, AlignImageSpan.VERTICAL_ALIGN_BASELINE));
     return this;
   }
 
-  private void applySpanForLast(SpanIndexer span) {
-    SpanIndexer.Element last = elements.getLast();
+  private void applySpanForLast(IndexerProcessor span) {
+    IndexerProcessor.Element last = elements.getLast();
     if (last == null) {
       return;
     }
-    elements.add(new SpanIndexer.Element(span, last.getStart(), last.getLength()));
+    elements.add(new IndexerProcessor.Element(span, last.getStart(), last.getLength()));
   }
 
   /**
@@ -129,7 +129,7 @@ public final class PlaceholderSpans {
    */
   public Spannable end() {
     Spannable spannable = new SpannableString(this.source);
-    SpanIndexer.applyAll(spannable, elements);
+    IndexerProcessor.applyAll(spannable, elements);
 
     elements.clear();
     return spannable;
@@ -142,14 +142,14 @@ public final class PlaceholderSpans {
   /**
    * 处理头部的占位符
    */
-  private void handleHeadPlaceHolder(String data, SpanIndexer indexer) {
+  private void handleHeadPlaceHolder(String data, IndexerProcessor indexer) {
     int index = source.indexOf(HOLDER, startIndex);
     if (index == -1) {
       return;
     }
     startIndex = index;
     source = source.replace(index, index + HOLDER.length(), data);
-    elements.add(new SpanIndexer.Element(indexer, index, data.length()));
+    elements.add(new IndexerProcessor.Element(indexer, index, data.length()));
   }
 
 }

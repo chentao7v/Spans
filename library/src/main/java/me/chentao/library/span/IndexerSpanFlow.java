@@ -16,58 +16,58 @@ import androidx.annotation.Px;
  * <br>
  * create by chentao on 2023-02-23.
  */
-public final class IndexerSpans {
+public final class IndexerSpanFlow {
 
   @NonNull
   private final Spannable spannable;
 
   private boolean clickable = false;
 
-  IndexerSpans(@NonNull CharSequence source) {
+  IndexerSpanFlow(@NonNull CharSequence source) {
     this.spannable = new SpannableString(source);
   }
 
   /**
    * 给指定区间 [start,end) 的文本设置颜色
    */
-  public IndexerSpans color(@ColorInt int color, int start, int end) {
-    new SpanIndexer.ColorSpan(color).apply(spannable, start, end);
+  public IndexerSpanFlow color(@ColorInt int color, int start, int end) {
+    new IndexerProcessor.ColorProcessor(color).apply(spannable, start, end);
     return this;
   }
 
   /**
    * 给指定区间 [start,end) 的文本设置点击事件与颜色
    */
-  public IndexerSpans click(@ColorInt int color, int start, int end, @Nullable View.OnClickListener listener) {
+  public IndexerSpanFlow click(@ColorInt int color, int start, int end, @Nullable View.OnClickListener listener) {
     clickable = true;
-    new SpanIndexer.ClickSpan(color, listener).apply(spannable, start, end);
+    new IndexerProcessor.ClickProcessor(color, listener).apply(spannable, start, end);
     return this;
   }
 
   /**
    * 给指定区间 [start,end) 的文本设置点击事件
    */
-  public IndexerSpans click(int start, int end, @Nullable View.OnClickListener listener) {
+  public IndexerSpanFlow click(int start, int end, @Nullable View.OnClickListener listener) {
     return click(-1, start, end, listener);
   }
 
   /**
    * 指定区间 [start,end) 的文本的文字大小
    */
-  public IndexerSpans size(@Px int size, int start, int end) {
-    new SpanIndexer.SizeSpan(size).apply(spannable, start, end);
+  public IndexerSpanFlow size(@Px int size, int start, int end) {
+    new IndexerProcessor.SizeProcessor(size).apply(spannable, start, end);
     return this;
   }
 
   /**
    * 对指定区间 [start,end) 的文本加粗
    */
-  public IndexerSpans bold(int start, int end) {
-    new SpanIndexer.BoldSpan().apply(spannable, start, end);
+  public IndexerSpanFlow bold(int start, int end) {
+    new IndexerProcessor.BoldProcessor().apply(spannable, start, end);
     return this;
   }
 
-  public IndexerSpans clickable() {
+  public IndexerSpanFlow clickable() {
     this.clickable = true;
     return this;
   }

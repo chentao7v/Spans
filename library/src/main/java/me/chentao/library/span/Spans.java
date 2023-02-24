@@ -18,29 +18,29 @@ public final class Spans {
   /**
    * 通过流水线的方式设置 Span。
    *
-   * @see PipelineSpans
+   * @see SequenceSpanFlow
    */
-  public static PipelineSpans pipeline() {
-    return new PipelineSpans();
+  public static SequenceSpanFlow sequence() {
+    return new SequenceSpanFlow();
   }
 
   /**
    * 通过索引的方式设置 Span。
    *
-   * @see IndexerSpans
+   * @see IndexerSpanFlow
    */
-  public static IndexerSpans indexer(CharSequence source) {
-    return new IndexerSpans(source);
+  public static IndexerSpanFlow indexer(CharSequence source) {
+    return new IndexerSpanFlow(source);
   }
 
   /**
    * 通过替换占位符的方式设置 Span。
    *
-   * @param source 包含占位符 {@link PlaceholderSpans#HOLDER} 的字符串
-   * @see PlaceholderSpans
+   * @param source 包含占位符 {@link PlaceholderSpanFlow#HOLDER} 的字符串
+   * @see PlaceholderSpanFlow
    */
-  public static PlaceholderSpans placeholder(String source) {
-    return new PlaceholderSpans(source);
+  public static PlaceholderSpanFlow placeholder(String source) {
+    return new PlaceholderSpanFlow(source);
   }
 
   private static void markClickable(@NonNull TextView textView) {

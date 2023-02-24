@@ -16,18 +16,18 @@ import androidx.annotation.Nullable;
 /**
  * create by chentao on 2023-02-23.
  */
-public interface SpanPipeline<T, R> {
+public interface SequenceProcessor<T, R> {
 
   /**
    * 给传入的 {@link CharSequence} 设置新的 Span 的类
    */
-  abstract class NewSpan implements SpanPipeline<CharSequence, Spannable> {}
+  abstract class NewSequenceProcessor implements SequenceProcessor<CharSequence, Spannable> {}
 
-  final class ColorSpan extends NewSpan {
+  final class ColorProcessor extends NewSequenceProcessor {
 
     public final int color;
 
-    public ColorSpan(@ColorInt int color) {
+    public ColorProcessor(@ColorInt int color) {
       this.color = color;
     }
 
@@ -39,13 +39,13 @@ public interface SpanPipeline<T, R> {
     }
   }
 
-  final class ClickSpan extends NewSpan {
+  final class ClickProcessor extends NewSequenceProcessor {
 
     @NonNull
-    private final OverlaySpan click;
+    private final OverlayProcessor click;
 
-    public ClickSpan(@ColorInt int color, @Nullable View.OnClickListener listener) {
-      this.click = new OverlayClickSpan(color, listener);
+    public ClickProcessor(@ColorInt int color, @Nullable View.OnClickListener listener) {
+      this.click = new OverlayClickProcessor(color, listener);
     }
 
     @Override
@@ -57,9 +57,9 @@ public interface SpanPipeline<T, R> {
   /**
    * 给现有 {@link Spannable} 叠加 Span 的类
    */
-  abstract class OverlaySpan implements SpanPipeline<Spannable, Spannable> {}
+  abstract class OverlayProcessor implements SequenceProcessor<Spannable, Spannable> {}
 
-  final class BoldSpan extends OverlaySpan {
+  final class BoldProcessor extends OverlayProcessor {
 
     @Override
     public Spannable apply(Spannable source) {
@@ -68,11 +68,11 @@ public interface SpanPipeline<T, R> {
     }
   }
 
-  final class SizeSpan extends OverlaySpan {
+  final class SizeProcessor extends OverlayProcessor {
 
     private final int size;
 
-    public SizeSpan(int size) {
+    public SizeProcessor(int size) {
       this.size = size;
     }
 
@@ -83,14 +83,14 @@ public interface SpanPipeline<T, R> {
     }
   }
 
-  final class OverlayClickSpan extends OverlaySpan {
+  final class OverlayClickProcessor extends OverlayProcessor {
 
     @ColorInt
     public final int color;
 
     private final View.OnClickListener listener;
 
-    public OverlayClickSpan(@ColorInt int color, @Nullable View.OnClickListener listener) {
+    public OverlayClickProcessor(@ColorInt int color, @Nullable View.OnClickListener listener) {
       this.color = color;
       this.listener = listener;
     }

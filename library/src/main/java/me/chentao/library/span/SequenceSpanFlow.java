@@ -19,73 +19,73 @@ import java.util.Queue;
  * <br>
  * create by chentao on 2023-02-23.
  */
-public final class PipelineSpans {
+public final class SequenceSpanFlow {
 
   private final Deque<Spannable> spans;
 
   private boolean clickable;
 
-  PipelineSpans() {
+  SequenceSpanFlow() {
     spans = new ArrayDeque<>();
   }
 
   /**
    * 给指定的 {@link CharSequence} 添加点击事件和颜色
    */
-  public PipelineSpans click(CharSequence source, @ColorInt int color, @Nullable View.OnClickListener listener) {
+  public SequenceSpanFlow click(CharSequence source, @ColorInt int color, @Nullable View.OnClickListener listener) {
     this.clickable = true;
-    spans.add(new SpanPipeline.ClickSpan(color, listener).apply(source));
+    spans.add(new SequenceProcessor.ClickProcessor(color, listener).apply(source));
     return this;
   }
 
   /**
    * 给指定的 {@link CharSequence} 添加点击事件
    */
-  public PipelineSpans click(CharSequence source, @Nullable View.OnClickListener listener) {
+  public SequenceSpanFlow click(CharSequence source, @Nullable View.OnClickListener listener) {
     return click(source, -1, listener);
   }
 
   /**
    * 给最近一个 Span 添加点击事件和颜色
    */
-  public PipelineSpans click(@ColorInt int color, @Nullable View.OnClickListener listener) {
+  public SequenceSpanFlow click(@ColorInt int color, @Nullable View.OnClickListener listener) {
     this.clickable = true;
-    applySpanForLast(new SpanPipeline.OverlayClickSpan(color, listener));
+    applySpanForLast(new SequenceProcessor.OverlayClickProcessor(color, listener));
     return this;
   }
 
   /**
    * 给最近一个 Span 添加点击事件
    */
-  public PipelineSpans click(@Nullable View.OnClickListener listener) {
+  public SequenceSpanFlow click(@Nullable View.OnClickListener listener) {
     return click(-1, listener);
   }
 
   /**
    * 给指定的 {@link CharSequence} 添加设置颜色
    */
-  public PipelineSpans color(CharSequence source, @ColorInt int color) {
-    spans.add(new SpanPipeline.ColorSpan(color).apply(source));
+  public SequenceSpanFlow color(CharSequence source, @ColorInt int color) {
+    spans.add(new SequenceProcessor.ColorProcessor(color).apply(source));
     return this;
   }
 
   /**
    * 对最近的一个 Span 进行加粗
    */
-  public PipelineSpans bold() {
-    applySpanForLast(new SpanPipeline.BoldSpan());
+  public SequenceSpanFlow bold() {
+    applySpanForLast(new SequenceProcessor.BoldProcessor());
     return this;
   }
 
   /**
    * 最近一个 Span 设置指定大小
    */
-  public PipelineSpans size(@Px int size) {
-    applySpanForLast(new SpanPipeline.SizeSpan(size));
+  public SequenceSpanFlow size(@Px int size) {
+    applySpanForLast(new SequenceProcessor.SizeProcessor(size));
     return this;
   }
 
-  private void applySpanForLast(SpanPipeline<Spannable, ?> pipeline) {
+  private void applySpanForLast(SequenceProcessor<Spannable, ?> pipeline) {
     Spannable last = spans.getLast();
     if (last == null) {
       return;
@@ -93,7 +93,7 @@ public final class PipelineSpans {
     pipeline.apply(last);
   }
 
-  public PipelineSpans clickable() {
+  public SequenceSpanFlow clickable() {
     this.clickable = true;
     return this;
   }
@@ -115,9 +115,9 @@ public final class PipelineSpans {
   }
 
   /**
-   * 转换为 {@link IndexerSpans}
+   * 转换为 {@link IndexerSpanFlow}
    */
-  public IndexerSpans toIndex() {
+  public IndexerSpanFlow toIndex() {
     Spannable spannable = end();
     return Spans.indexer(spannable);
   }

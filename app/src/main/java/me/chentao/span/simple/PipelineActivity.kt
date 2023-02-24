@@ -40,7 +40,7 @@ class PipelineActivity : AppCompatActivity() {
     val msg3 = "文本CCCCCCCCCCC\n"
     val msg4 = "文本DDDDD"
 
-    Spans.pipeline()
+    Spans.sequence()
       .color(msg1, colorRes(R.color.purple_200))
       .click {
         Log.d(TAG, "click AAA")
