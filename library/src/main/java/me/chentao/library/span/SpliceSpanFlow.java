@@ -19,73 +19,73 @@ import java.util.Queue;
  * <br>
  * create by chentao on 2023-02-23.
  */
-public final class SequenceSpanFlow {
+public final class SpliceSpanFlow {
 
   private final Deque<Spannable> spans;
 
   private boolean clickable;
 
-  SequenceSpanFlow() {
+  SpliceSpanFlow() {
     spans = new ArrayDeque<>();
   }
 
   /**
    * 给指定的 {@link CharSequence} 添加点击事件和颜色
    */
-  public SequenceSpanFlow click(CharSequence source, @ColorInt int color, @Nullable View.OnClickListener listener) {
+  public SpliceSpanFlow click(CharSequence source, @ColorInt int color, @Nullable View.OnClickListener listener) {
     this.clickable = true;
-    spans.add(new SequenceProcessor.ClickProcessor(color, listener).apply(source));
+    spans.add(new SpliceProcessor.ClickProcessor(color, listener).apply(source));
     return this;
   }
 
   /**
    * 给指定的 {@link CharSequence} 添加点击事件
    */
-  public SequenceSpanFlow click(CharSequence source, @Nullable View.OnClickListener listener) {
+  public SpliceSpanFlow click(CharSequence source, @Nullable View.OnClickListener listener) {
     return click(source, -1, listener);
   }
 
   /**
    * 给最近一个 Span 添加点击事件和颜色
    */
-  public SequenceSpanFlow click(@ColorInt int color, @Nullable View.OnClickListener listener) {
+  public SpliceSpanFlow click(@ColorInt int color, @Nullable View.OnClickListener listener) {
     this.clickable = true;
-    applySpanForLast(new SequenceProcessor.OverlayClickProcessor(color, listener));
+    applySpanForLast(new SpliceProcessor.OverlayClickProcessor(color, listener));
     return this;
   }
 
   /**
    * 给最近一个 Span 添加点击事件
    */
-  public SequenceSpanFlow click(@Nullable View.OnClickListener listener) {
+  public SpliceSpanFlow click(@Nullable View.OnClickListener listener) {
     return click(-1, listener);
   }
 
   /**
    * 给指定的 {@link CharSequence} 添加设置颜色
    */
-  public SequenceSpanFlow color(CharSequence source, @ColorInt int color) {
-    spans.add(new SequenceProcessor.ColorProcessor(color).apply(source));
+  public SpliceSpanFlow color(CharSequence source, @ColorInt int color) {
+    spans.add(new SpliceProcessor.ColorProcessor(color).apply(source));
     return this;
   }
 
   /**
    * 对最近的一个 Span 进行加粗
    */
-  public SequenceSpanFlow bold() {
-    applySpanForLast(new SequenceProcessor.BoldProcessor());
+  public SpliceSpanFlow bold() {
+    applySpanForLast(new SpliceProcessor.BoldProcessor());
     return this;
   }
 
   /**
    * 最近一个 Span 设置指定大小
    */
-  public SequenceSpanFlow size(@Px int size) {
-    applySpanForLast(new SequenceProcessor.SizeProcessor(size));
+  public SpliceSpanFlow size(@Px int size) {
+    applySpanForLast(new SpliceProcessor.SizeProcessor(size));
     return this;
   }
 
-  private void applySpanForLast(SequenceProcessor<Spannable, ?> pipeline) {
+  private void applySpanForLast(SpliceProcessor<Spannable, ?> pipeline) {
     Spannable last = spans.getLast();
     if (last == null) {
       return;
@@ -93,7 +93,7 @@ public final class SequenceSpanFlow {
     pipeline.apply(last);
   }
 
-  public SequenceSpanFlow clickable() {
+  public SpliceSpanFlow clickable() {
     this.clickable = true;
     return this;
   }

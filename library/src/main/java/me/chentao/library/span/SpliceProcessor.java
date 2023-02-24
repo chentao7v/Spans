@@ -16,12 +16,12 @@ import androidx.annotation.Nullable;
 /**
  * create by chentao on 2023-02-23.
  */
-public interface SequenceProcessor<T, R> {
+public interface SpliceProcessor<T, R> {
 
   /**
    * 给传入的 {@link CharSequence} 设置新的 Span 的类
    */
-  abstract class NewSequenceProcessor implements SequenceProcessor<CharSequence, Spannable> {}
+  abstract class NewSequenceProcessor implements SpliceProcessor<CharSequence, Spannable> {}
 
   final class ColorProcessor extends NewSequenceProcessor {
 
@@ -57,7 +57,7 @@ public interface SequenceProcessor<T, R> {
   /**
    * 给现有 {@link Spannable} 叠加 Span 的类
    */
-  abstract class OverlayProcessor implements SequenceProcessor<Spannable, Spannable> {}
+  abstract class OverlayProcessor implements SpliceProcessor<Spannable, Spannable> {}
 
   final class BoldProcessor extends OverlayProcessor {
 

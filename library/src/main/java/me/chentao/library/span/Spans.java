@@ -18,10 +18,10 @@ public final class Spans {
   /**
    * 通过流水线的方式设置 Span。
    *
-   * @see SequenceSpanFlow
+   * @see SpliceSpanFlow
    */
-  public static SequenceSpanFlow sequence() {
-    return new SequenceSpanFlow();
+  public static SpliceSpanFlow pipeline() {
+    return new SpliceSpanFlow();
   }
 
   /**
