@@ -41,16 +41,16 @@ class PipelineActivity : AppCompatActivity() {
     val msg4 = "文本DDDDD"
 
     Spans.pipeline()
-      .color(msg1, getColor(R.color.purple_200))
+      .color(msg1, colorRes(R.color.purple_200))
       .click {
         Log.d(TAG, "click AAA")
       }
-      .color(msg2, getColor(R.color.black))
+      .color(msg2, colorRes(R.color.black))
       .click {
         Log.d(TAG, "click BBB")
       }
-      .size(dpToPx(this, 20))
-      .color(msg3, getColor(R.color.teal_200))
+      .size(20.dp)
+      .color(msg3, colorRes(R.color.teal_200))
       .bold()
       .click(msg4) {
         Log.d(TAG, "click DDD")
