@@ -92,19 +92,22 @@ public interface IndexerProcessor {
     }
   }
 
-  class AbsoluteImage implements IndexerProcessor {
+  /**
+   * 本地图片
+   */
+  class Image implements IndexerProcessor {
 
     @NonNull
     private final AlignImageSpan image;
 
     private final int width;
 
-    public AbsoluteImage(@NonNull Bitmap bitmap, int width, @AlignImageSpan.VerticalAlign int verticalAlign) {
+    public Image(@NonNull Bitmap bitmap, int width, @AlignImageSpan.VerticalAlign int verticalAlign) {
       image = new AlignImageSpan(bitmap, verticalAlign);
       this.width = width;
     }
 
-    public AbsoluteImage(@NonNull Drawable drawable, int width, @AlignImageSpan.VerticalAlign int verticalAlign) {
+    public Image(@NonNull Drawable drawable, int width, @AlignImageSpan.VerticalAlign int verticalAlign) {
       image = new AlignImageSpan(drawable, verticalAlign);
       this.width = width;
     }
@@ -116,16 +119,49 @@ public interface IndexerProcessor {
     }
   }
 
+  class DynamicProxy implements IndexerProcessor {
+
+    @Nullable
+    private Spannable spannable;
+    private int start;
+    private int end;
+
+    @Override
+    public void apply(Spannable spannable, int start, int end) {
+      this.spannable = spannable;
+      this.start = start;
+      this.end = end;
+    }
+
+    public void invalidate(@NonNull IndexerProcessor processor) {
+      processor.apply(spannable, start, end);
+    }
+
+    @Nullable
+    public Spannable getSpannable() {
+      return spannable;
+    }
+
+    public int getStart() {
+      return start;
+    }
+
+    public int getEnd() {
+      return end;
+    }
+
+  }
+
   /**
    * 封装一段文本的各个 Span。
    */
   class Element {
     private final int start;
     private final int length;
-    private final IndexerProcessor indexer;
+    private final IndexerProcessor processor;
 
-    public Element(IndexerProcessor indexer, int start, int length) {
-      this.indexer = indexer;
+    public Element(IndexerProcessor processor, int start, int length) {
+      this.processor = processor;
       this.start = start;
       this.length = length;
     }
@@ -142,8 +178,8 @@ public interface IndexerProcessor {
       return length;
     }
 
-    public IndexerProcessor getIndexer() {
-      return indexer;
+    public IndexerProcessor processor() {
+      return processor;
     }
   }
 
@@ -159,7 +195,7 @@ public interface IndexerProcessor {
    */
   static void applyAll(Spannable spannable, Collection<Element> elements) {
     for (Element element : elements) {
-      IndexerProcessor indexer = element.getIndexer();
+      IndexerProcessor indexer = element.processor();
       int start = element.getStart();
       int end = element.getEnd();
       indexer.apply(spannable, start, end);

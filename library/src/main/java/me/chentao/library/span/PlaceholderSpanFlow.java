@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import androidx.annotation.ColorInt;
@@ -107,12 +108,37 @@ public final class PlaceholderSpanFlow {
    */
   public PlaceholderSpanFlow image(Drawable drawable, @Px int size) {
     // 添加一个空文本
-    handleHeadPlaceHolder(" ", new IndexerProcessor.AbsoluteImage(drawable, size, AlignImageSpan.VERTICAL_ALIGN_CENTER));
+    handleHeadPlaceHolder(" ", new IndexerProcessor.Image(drawable, size, AlignImageSpan.VERTICAL_ALIGN_CENTER));
     return this;
   }
 
   public PlaceholderSpanFlow image(Bitmap bitmap, @Px int size) {
-    handleHeadPlaceHolder(" ", new IndexerProcessor.AbsoluteImage(bitmap, size, AlignImageSpan.VERTICAL_ALIGN_BASELINE));
+    handleHeadPlaceHolder(" ", new IndexerProcessor.Image(bitmap, size, AlignImageSpan.VERTICAL_ALIGN_CENTER));
+    return this;
+  }
+
+  public PlaceholderSpanFlow dynamicImage(@NonNull SpanImageLoader loader, @Nullable String url, @Px int size) {
+    IndexerProcessor.DynamicProxy proxy = new IndexerProcessor.DynamicProxy();
+    handleHeadPlaceHolder(" ", proxy);
+
+    loader.load(url, new SpanImageLoader.Callback() {
+      @Override
+      public void onSuccess(@NonNull Bitmap resource) {
+        // todo 注册为异步的? Span????
+        // 后面再更新即可 ????
+        // todo 需要再次调用 textView#setText()
+        Log.e("UUUUU", "load image success");
+        IndexerProcessor.Image processor = new IndexerProcessor.Image(resource, size, AlignImageSpan.VERTICAL_ALIGN_CENTER);
+        proxy.invalidate(processor);
+      }
+
+      @Override
+      public void onError(@Nullable Bitmap error) {
+        if (error != null) {
+        }
+      }
+    });
+
     return this;
   }
 
