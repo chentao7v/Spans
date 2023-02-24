@@ -92,17 +92,17 @@ public interface SpanIndexer {
     }
   }
 
-  class VerticalSizeImageSpan implements SpanIndexer {
+  class SizeImageSpan implements SpanIndexer {
 
     @NonNull
-    private final VerticalImageSpan image;
+    private final FixedSizeImageSpan image;
 
-    public VerticalSizeImageSpan(@NonNull Bitmap bitmap, int width) {
-      image = new VerticalImageSpan(bitmap, width);
+    public SizeImageSpan(@NonNull Bitmap bitmap, int width, @FixedSizeImageSpan.VerticalAlign int verticalAlign) {
+      image = new FixedSizeImageSpan(bitmap, width, verticalAlign);
     }
 
-    public VerticalSizeImageSpan(@NonNull Drawable drawable, int width) {
-      image = new VerticalImageSpan(drawable, width);
+    public SizeImageSpan(@NonNull Drawable drawable, int width, @FixedSizeImageSpan.VerticalAlign int verticalAlign) {
+      image = new FixedSizeImageSpan(drawable, width, verticalAlign);
     }
 
     @Override

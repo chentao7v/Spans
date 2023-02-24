@@ -103,7 +103,7 @@ public final class PlaceholderSpans {
 
   public PlaceholderSpans image(Drawable drawable, @Px int size) {
     // 添加一个空文本
-    handleHeadPlaceHolder(" ", new SpanIndexer.VerticalSizeImageSpan(drawable, size));
+    handleHeadPlaceHolder(" ", new SpanIndexer.SizeImageSpan(drawable, size, FixedSizeImageSpan.VERTICAL_ALIGN_CENTER));
     return this;
   }
 
