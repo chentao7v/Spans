@@ -92,19 +92,19 @@ public interface SpanIndexer {
     }
   }
 
-  class SizeImageSpan implements SpanIndexer {
+  class AbsoluteSizeImageSpan implements SpanIndexer {
 
     @NonNull
     private final AlignImageSpan image;
 
     private final int width;
 
-    public SizeImageSpan(@NonNull Bitmap bitmap, int width, @AlignImageSpan.VerticalAlign int verticalAlign) {
+    public AbsoluteSizeImageSpan(@NonNull Bitmap bitmap, int width, @AlignImageSpan.VerticalAlign int verticalAlign) {
       image = new AlignImageSpan(bitmap, verticalAlign);
       this.width = width;
     }
 
-    public SizeImageSpan(@NonNull Drawable drawable, int width, @AlignImageSpan.VerticalAlign int verticalAlign) {
+    public AbsoluteSizeImageSpan(@NonNull Drawable drawable, int width, @AlignImageSpan.VerticalAlign int verticalAlign) {
       image = new AlignImageSpan(drawable, verticalAlign);
       this.width = width;
     }

@@ -107,12 +107,12 @@ public final class PlaceholderSpans {
    */
   public PlaceholderSpans image(Drawable drawable, @Px int size) {
     // 添加一个空文本
-    handleHeadPlaceHolder(" ", new SpanIndexer.SizeImageSpan(drawable, size, AlignImageSpan.VERTICAL_ALIGN_CENTER));
+    handleHeadPlaceHolder(" ", new SpanIndexer.AbsoluteSizeImageSpan(drawable, size, AlignImageSpan.VERTICAL_ALIGN_CENTER));
     return this;
   }
 
   public PlaceholderSpans image(Bitmap bitmap, @Px int size) {
-    handleHeadPlaceHolder(" ", new SpanIndexer.SizeImageSpan(bitmap, size, AlignImageSpan.VERTICAL_ALIGN_BASELINE));
+    handleHeadPlaceHolder(" ", new SpanIndexer.AbsoluteSizeImageSpan(bitmap, size, AlignImageSpan.VERTICAL_ALIGN_BASELINE));
     return this;
   }
 
