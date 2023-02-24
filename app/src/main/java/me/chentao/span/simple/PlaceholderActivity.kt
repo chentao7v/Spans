@@ -38,12 +38,12 @@ class PlaceholderActivity : AppCompatActivity() {
     val msg = "对不起，因您已注册的{$}，我们需要核实您的身份及手机号码信息后注册，请插入对应的手机卡{$}并打开该改手机卡{$}流量开关哟。注册成功后，此手机号才会仅分配给您使用。"
 
     Spans.placeholder(msg)
-      .image(getDrawable(R.drawable.icon_rect), dpToPx(this, 60))
       .color("188****8888", getColor(R.color.teal_200))
       .size(dpToPx(this, 30))
       .click {
         Log.i(TAG, "click A ~~~")
       }
+      .image(getDrawable(R.drawable.icon_rect), dpToPx(this, 60))
       .color("199****9999", getColor(R.color.teal_700))
       .click {
         Log.i(TAG, "click B B !!!")

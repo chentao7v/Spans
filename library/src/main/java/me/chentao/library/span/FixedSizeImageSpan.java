@@ -106,8 +106,11 @@ public class FixedSizeImageSpan extends ImageSpan {
     if (b == null) {
       return;
     }
+
+    Log.d("UUUUU", "draw -> top = " + top + ", bottom =  " + bottom + ", y(baseline) = " + y);
+
     canvas.save();
-    canvas.translate(x, 0);
+    canvas.translate(x, top);
     b.draw(canvas);
     canvas.restore();
   }
