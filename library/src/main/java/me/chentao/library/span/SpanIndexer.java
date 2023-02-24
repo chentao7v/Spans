@@ -97,17 +97,21 @@ public interface SpanIndexer {
     @NonNull
     private final AlignImageSpan image;
 
+    private final int width;
+
     public SizeImageSpan(@NonNull Bitmap bitmap, int width, @AlignImageSpan.VerticalAlign int verticalAlign) {
       image = new AlignImageSpan(bitmap, verticalAlign);
+      this.width = width;
     }
 
     public SizeImageSpan(@NonNull Drawable drawable, int width, @AlignImageSpan.VerticalAlign int verticalAlign) {
       image = new AlignImageSpan(drawable, verticalAlign);
+      this.width = width;
     }
 
     @Override
     public void apply(Spannable spannable, int start, int end) {
-      image.setBounds();
+      image.setScaleBounds(width);
       spannable.setSpan(image, start, end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
     }
   }

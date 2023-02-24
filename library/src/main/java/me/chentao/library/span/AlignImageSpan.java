@@ -57,14 +57,13 @@ public class AlignImageSpan extends ImageSpan {
     setBounds(b, width, height);
   }
 
-  public void setScaleBounds(int width) {
+  public void setScaleBounds(int realWidth) {
     Drawable b = getCachedDrawable();
     if (b == null) {
       return;
     }
 
-    int realWidth = width;
-    int realHeight = (int) (b.getIntrinsicHeight() * width / (b.getIntrinsicWidth() * 1.f) + 0.5f);
+    int realHeight = (int) (b.getIntrinsicHeight() * realWidth / (b.getIntrinsicWidth() * 1.f) + 0.5f);
     setBounds(b, realWidth, realHeight);
   }
 
