@@ -48,7 +48,7 @@ class PlaceholderActivity : AppCompatActivity() {
         Log.i(TAG, "click B B !!!")
       }
       .size(25.dp)
-      .image(drawableRes(R.drawable.icon_rect), 10.dp)
+      .image(drawableRes(R.drawable.icon_rect), 20.dp)
       .inject(tvMsg)
   }
 

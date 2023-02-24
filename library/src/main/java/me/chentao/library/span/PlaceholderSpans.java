@@ -1,5 +1,6 @@
 package me.chentao.library.span;
 
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -101,9 +102,17 @@ public final class PlaceholderSpans {
     return this;
   }
 
+  /**
+   * 用指定的图片替换替换占位符
+   */
   public PlaceholderSpans image(Drawable drawable, @Px int size) {
     // 添加一个空文本
-    handleHeadPlaceHolder(" ", new SpanIndexer.SizeImageSpan(drawable, size, AlignImageSpan.VERTICAL_ALIGN_BASELINE));
+    handleHeadPlaceHolder(" ", new SpanIndexer.SizeImageSpan(drawable, size, AlignImageSpan.VERTICAL_ALIGN_CENTER));
+    return this;
+  }
+
+  public PlaceholderSpans image(Bitmap bitmap, @Px int size) {
+    handleHeadPlaceHolder(" ", new SpanIndexer.SizeImageSpan(bitmap, size, AlignImageSpan.VERTICAL_ALIGN_BASELINE));
     return this;
   }
 
