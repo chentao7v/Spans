@@ -116,12 +116,12 @@ public final class PlaceholderSpanFlow {
    */
   public PlaceholderSpanFlow image(Drawable drawable, @Px int size) {
     // 添加一个空文本
-    handleHeadPlaceHolder(" ", new IndexerProcessor.Image(drawable, size, AlignImageSpan.VERTICAL_ALIGN_CENTER));
+    handleHeadPlaceHolder("", new IndexerProcessor.Image(drawable, size, AlignImageSpan.VERTICAL_ALIGN_CENTER));
     return this;
   }
 
   public PlaceholderSpanFlow image(Bitmap bitmap, @Px int size) {
-    handleHeadPlaceHolder(" ", new IndexerProcessor.Image(bitmap, size, AlignImageSpan.VERTICAL_ALIGN_CENTER));
+    handleHeadPlaceHolder("", new IndexerProcessor.Image(bitmap, size, AlignImageSpan.VERTICAL_ALIGN_CENTER));
     return this;
   }
 
@@ -147,15 +147,14 @@ public final class PlaceholderSpanFlow {
     Spannable spannable = new SpannableString(this.source);
     IndexerProcessor.applyAll(spannable, elements);
 
-    elements.clear();
     return spannable;
   }
 
   public void inject(TextView textView) {
-    boolean aysnc = asyncEngine.containsAsync();
+    boolean async = asyncEngine.containsAsync();
     Spannable spannable = end();
-    Spans.inject(textView, end(), clickable, false);
-    if (aysnc) {
+    Spans.inject(textView, spannable, clickable, false);
+    if (async) {
       asyncEngine.loadAllImages(new AsyncImageSpanEngine.Listener() {
         @Override
         public void onFinish() {
