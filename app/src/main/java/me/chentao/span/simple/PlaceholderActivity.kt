@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import me.chentao.library.span.Config
 import me.chentao.library.span.Spans
 import me.chentao.span.IMAGE_URL
 import me.chentao.span.R
@@ -39,19 +40,31 @@ class PlaceholderActivity : AppCompatActivity() {
     val msg = "对不起，因您已注册的{$}，我们需要核实您的身份{$}及手机号码信息后注册，请插入对应的手机卡{$}并打开该改手机卡{$}流量开关哟。注册成功后，此手机号才会仅分配给您使用。"
 
     Spans.placeholder(msg)
-      .color("188****8888", colorRes(R.color.teal_200))
-      .size(30.dp)
-      .click {
-        Log.i(TAG, "click A ~~~")
-      }
-      .color("199****9999", colorRes(R.color.teal_700))
-      .click {
-        Log.i(TAG, "click B B !!!")
-      }
-      .size(25.dp)
-      .image(drawableRes(R.drawable.mini_icon3), 50.dp)
+      .replace("188****8888",
+        Config.ofDefault()
+          .color(colorRes(R.color.teal_200))
+          .size(30.dp)
+          .click {
+            Log.i(TAG, "click A ~~~")
+          })
+      .replace("199****9999",
+        Config.ofDefault()
+          .color(colorRes(R.color.teal_700))
+          .size(25.dp)
+          .click {
+            Log.i(TAG, "click B B !!!")
+          })
+      .replace(
+        Config.ofImage()
+          .drawable(drawableRes(R.drawable.mini_icon3))
+          .width(50.dp)
+      )
+      .replace(
+        Config.ofImage()
+          .url(IMAGE_URL)
+          .width(80.dp)
+      )
       .loader(GlideImageLoader())
-      .image(IMAGE_URL, 80.dp)
       .inject(tvMsg)
   }
 

@@ -25,6 +25,8 @@ import java.lang.ref.WeakReference;
  */
 public class AlignImageSpan extends ImageSpan {
 
+  private static final String TAG = "AlignImageSpan";
+
   public static final int VERTICAL_ALIGN_BOTTOM = 0;
   public static final int VERTICAL_ALIGN_BASELINE = 1;
   public static final int VERTICAL_ALIGN_CENTER = 2;
@@ -33,7 +35,7 @@ public class AlignImageSpan extends ImageSpan {
   @Retention(RetentionPolicy.SOURCE)
   public @interface VerticalAlign {}
 
-  private WeakReference<Drawable> mDrawableRef;
+  private WeakReference<Drawable> drawableRef;
 
   @VerticalAlign
   private final int verticalAlign;
@@ -81,12 +83,12 @@ public class AlignImageSpan extends ImageSpan {
     }
 
     Rect rect = drawable.getBounds();
-    Log.d("UUUUU", "---> " + rect.toString());
+    Log.d(TAG, "---> " + rect.toString());
 
     if (fm != null) {
 
       Paint.FontMetricsInt fontMetrics = paint.getFontMetricsInt();
-      Log.i("UUUUU", "origin font metrics -> " + fontMetrics.toString());
+      Log.i(TAG, "origin font metrics -> " + fontMetrics.toString());
 
       // 字高
       int fontHeight = fontMetrics.bottom - fontMetrics.top;
@@ -120,7 +122,7 @@ public class AlignImageSpan extends ImageSpan {
       return;
     }
 
-    Log.d("UUUUU", "draw -> top = " + top + ", bottom =  " + bottom + ", y(baseline) = " + y);
+    Log.d(TAG, "draw -> top = " + top + ", bottom =  " + bottom + ", y(baseline) = " + y);
 
     canvas.save();
     canvas.translate(x, top);
@@ -129,14 +131,14 @@ public class AlignImageSpan extends ImageSpan {
   }
 
   private Drawable getCachedDrawable() {
-    WeakReference<Drawable> wr = mDrawableRef;
+    WeakReference<Drawable> wr = drawableRef;
     Drawable d = null;
 
     if (wr != null) {d = wr.get();}
 
     if (d == null) {
       d = getDrawable();
-      mDrawableRef = new WeakReference<>(d);
+      drawableRef = new WeakReference<>(d);
     }
 
     return d;

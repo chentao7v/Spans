@@ -15,7 +15,9 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.Px;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * 索引 Span 接口
@@ -23,6 +25,23 @@ import java.util.Collection;
  * create by chentao on 2023-02-23.
  */
 public interface IndexerProcessor {
+
+  final class ComposeProcessor implements IndexerProcessor {
+
+    @NonNull
+    private final List<IndexerProcessor> processors = new ArrayList<>();
+
+    public void addProcessor(IndexerProcessor processor) {
+      this.processors.add(processor);
+    }
+
+    @Override
+    public void apply(Spannable spannable, int start, int end) {
+      for (IndexerProcessor processor : this.processors) {
+        processor.apply(spannable, start, end);
+      }
+    }
+  }
 
   final class Color implements IndexerProcessor {
     @ColorInt

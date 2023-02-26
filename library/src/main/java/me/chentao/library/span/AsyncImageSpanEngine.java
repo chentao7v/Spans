@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * 对异步图片的处理。
- * <br》
+ * <br>
  * create by chentao on 2023-02-26.
  */
 public final class AsyncImageSpanEngine {
