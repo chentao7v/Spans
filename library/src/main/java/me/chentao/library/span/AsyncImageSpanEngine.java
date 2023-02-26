@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 对异步图片的处理。
@@ -17,7 +16,6 @@ public final class AsyncImageSpanEngine {
 
   private final List<String> urls = new LinkedList<>();
   private final List<IndexerProcessor.DynamicProxy> processors = new LinkedList<>();
-  private final AtomicInteger counter = new AtomicInteger(0);
 
   @Nullable
   private SpanImageLoader loader;
@@ -69,13 +67,8 @@ public final class AsyncImageSpanEngine {
       proxy.update(spannable, image);
     }
 
-    counter.incrementAndGet();
-
     // 标识处理完成
-    // if (counter.get() == urls.size()) {
-      listener.onFinish();
-      // destroy();
-    // }
+    listener.onFinish();
 
   }
 
