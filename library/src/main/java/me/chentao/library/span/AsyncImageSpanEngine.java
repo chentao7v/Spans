@@ -1,6 +1,6 @@
 package me.chentao.library.span;
 
-import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.text.Spannable;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -48,19 +48,19 @@ public final class AsyncImageSpanEngine {
 
       loader.load(url, new SpanImageLoader.Callback() {
         @Override
-        public void onSuccess(@NonNull Bitmap resource) {
+        public void onSuccess(@NonNull Drawable resource) {
           update(spannable, resource, proxy, listener);
         }
 
         @Override
-        public void onError(@Nullable Bitmap error) {
+        public void onError(@Nullable Drawable error) {
           update(spannable, error, proxy, listener);
         }
       });
     }
   }
 
-  private void update(@NonNull Spannable spannable, @Nullable Bitmap resource, IndexerProcessor.DynamicProxy proxy, @NonNull Listener listener) {
+  private void update(@NonNull Spannable spannable, @Nullable Drawable resource, IndexerProcessor.DynamicProxy proxy, @NonNull Listener listener) {
     if (resource != null) {
       IndexerProcessor.Image image = new IndexerProcessor.Image(
         resource,
@@ -72,10 +72,10 @@ public final class AsyncImageSpanEngine {
     counter.incrementAndGet();
 
     // 标识处理完成
-    if (counter.get() == urls.size()) {
+    // if (counter.get() == urls.size()) {
       listener.onFinish();
-      destroy();
-    }
+      // destroy();
+    // }
 
   }
 

@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     appContext = applicationContext
     setContentView(R.layout.activity_main)
 
-    loadImage()
+//    loadImage()
   }
 
   private fun loadImage() {

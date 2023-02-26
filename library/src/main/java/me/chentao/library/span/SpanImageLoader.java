@@ -1,6 +1,6 @@
 package me.chentao.library.span;
 
-import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -13,9 +13,9 @@ public interface SpanImageLoader {
 
   interface Callback {
 
-    void onSuccess(@NonNull Bitmap resource);
+    void onSuccess(@NonNull Drawable resource);
 
-    void onError(@Nullable Bitmap error);
+    void onError(@Nullable Drawable error);
 
   }
 

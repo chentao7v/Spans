@@ -146,7 +146,7 @@ public final class PlaceholderSpanFlow {
   public Spannable end() {
     Spannable spannable = new SpannableString(this.source);
     IndexerProcessor.applyAll(spannable, elements);
-
+    elements.clear();
     return spannable;
   }
 
