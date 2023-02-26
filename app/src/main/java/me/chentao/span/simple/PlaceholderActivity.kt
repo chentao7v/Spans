@@ -36,7 +36,7 @@ class PlaceholderActivity : AppCompatActivity() {
 
   private fun simple(tvMsg: TextView) {
 
-    val msg = "对不起，因您已注册的{$}，我们需要核实您的身份及手机号码信息后注册，请插入对应的手机卡{$}并打开该改手机卡{$}流量开关哟。注册成功后，此手机号才会仅分配给您使用。"
+    val msg = "对不起，因您已注册的{$}，我们需要核实您的身份{$}及手机号码信息后注册，请插入对应的手机卡{$}并打开该改手机卡{$}流量开关哟。注册成功后，此手机号才会仅分配给您使用。"
 
     Spans.placeholder(msg)
       .color("188****8888", colorRes(R.color.teal_200))
@@ -49,6 +49,7 @@ class PlaceholderActivity : AppCompatActivity() {
         Log.i(TAG, "click B B !!!")
       }
       .size(25.dp)
+      .image(drawableRes(R.drawable.mini_icon3), 50.dp)
       .loader(GlideImageLoader())
       .image(IMAGE_URL, 80.dp)
       .inject(tvMsg)

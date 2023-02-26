@@ -116,12 +116,12 @@ public final class PlaceholderSpanFlow {
    */
   public PlaceholderSpanFlow image(Drawable drawable, @Px int size) {
     // 添加一个空文本
-    handleHeadPlaceHolder("", new IndexerProcessor.Image(drawable, size, AlignImageSpan.VERTICAL_ALIGN_CENTER));
+    handleHeadPlaceHolder(" ", new IndexerProcessor.Image(drawable, size, AlignImageSpan.VERTICAL_ALIGN_CENTER));
     return this;
   }
 
   public PlaceholderSpanFlow image(Bitmap bitmap, @Px int size) {
-    handleHeadPlaceHolder("", new IndexerProcessor.Image(bitmap, size, AlignImageSpan.VERTICAL_ALIGN_CENTER));
+    handleHeadPlaceHolder(" ", new IndexerProcessor.Image(bitmap, size, AlignImageSpan.VERTICAL_ALIGN_CENTER));
     return this;
   }
 

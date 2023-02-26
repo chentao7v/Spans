@@ -116,7 +116,7 @@ public interface IndexerProcessor {
     @Override
     public void apply(Spannable spannable, int start, int end) {
       image.setScaleBounds(width);
-      spannable.setSpan(image, start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+      spannable.setSpan(image, start, end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
     }
   }
 
