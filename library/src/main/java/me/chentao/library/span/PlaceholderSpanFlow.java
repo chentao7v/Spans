@@ -158,7 +158,7 @@ public final class PlaceholderSpanFlow {
       Spannable text = (Spannable) textView.getText();
       asyncEngine.loadAllImages(text, new AsyncImageSpanEngine.Listener() {
         @Override
-        public void onFinish() {
+        public void onComplete() {
           textView.invalidate();
         }
       });

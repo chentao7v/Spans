@@ -68,7 +68,7 @@ public final class AsyncImageSpanEngine {
     }
 
     // 标识处理完成
-    listener.onFinish();
+    listener.onComplete();
 
   }
 
@@ -86,7 +86,7 @@ public final class AsyncImageSpanEngine {
   }
 
   public interface Listener {
-    void onFinish();
+    void onComplete();
   }
 
 }
