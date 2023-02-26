@@ -49,8 +49,8 @@ public final class Spans {
     textView.setHighlightColor(Color.TRANSPARENT);
   }
 
-  static void inject(@NonNull TextView textView, Spannable spannable, boolean clickable, boolean dynamic) {
-    if (dynamic) {
+  static void inject(@NonNull TextView textView, Spannable spannable, boolean clickable, boolean async) {
+    if (async) {
       textView.setText(spannable, TextView.BufferType.SPANNABLE);
     } else {
       textView.setText(spannable);

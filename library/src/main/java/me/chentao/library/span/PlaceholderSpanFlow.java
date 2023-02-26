@@ -35,16 +35,16 @@ public final class PlaceholderSpanFlow {
   private boolean clickable = false;
 
   @NonNull
-  private final DynamicImageSpanProcessor dynamicProcessor;
+  private final AsyncImageSpanEngine asyncEngine;
 
   PlaceholderSpanFlow(@NonNull String source) {
     this.source = new StringBuilder(source);
     this.elements = new ArrayDeque<>();
-    this.dynamicProcessor = new DynamicImageSpanProcessor();
+    this.asyncEngine = new AsyncImageSpanEngine();
   }
 
   public PlaceholderSpanFlow loader(@NonNull SpanImageLoader loader) {
-    this.dynamicProcessor.setImageLoader(loader);
+    this.asyncEngine.setImageLoader(loader);
     return this;
   }
 
@@ -128,7 +128,7 @@ public final class PlaceholderSpanFlow {
   public PlaceholderSpanFlow image(@NonNull String url, @Px int size) {
     IndexerProcessor.DynamicProxy proxy = new IndexerProcessor.DynamicProxy(size);
     handleHeadPlaceHolder(" ", proxy);
-    dynamicProcessor.register(url, proxy);
+    asyncEngine.register(url, proxy);
     return this;
   }
 
@@ -152,11 +152,11 @@ public final class PlaceholderSpanFlow {
   }
 
   public void inject(TextView textView) {
-    boolean dynamic = dynamicProcessor.isDynamic();
+    boolean aysnc = asyncEngine.containsAsync();
     Spannable spannable = end();
     Spans.inject(textView, end(), clickable, false);
-    if (dynamic) {
-      dynamicProcessor.loadAllImages(new DynamicImageSpanProcessor.Listener() {
+    if (aysnc) {
+      asyncEngine.loadAllImages(new AsyncImageSpanEngine.Listener() {
         @Override
         public void onFinish() {
           textView.setText(spannable);

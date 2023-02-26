@@ -8,9 +8,11 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
+ * 对异步图片的处理。
+ * <br》
  * create by chentao on 2023-02-26.
  */
-public final class DynamicImageSpanProcessor {
+public final class AsyncImageSpanEngine {
 
   private final List<String> urls = new LinkedList<>();
   private final List<IndexerProcessor.DynamicProxy> processors = new LinkedList<>();
@@ -80,7 +82,7 @@ public final class DynamicImageSpanProcessor {
     this.loader = loader;
   }
 
-  public boolean isDynamic() {
+  public boolean containsAsync() {
     return !urls.isEmpty();
   }
 
