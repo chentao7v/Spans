@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.text.Spannable;
 import android.text.SpannableString;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import androidx.annotation.ColorInt;
@@ -35,9 +34,18 @@ public final class PlaceholderSpanFlow {
 
   private boolean clickable = false;
 
+  @NonNull
+  private final DynamicImageSpanProcessor dynamicProcessor;
+
   PlaceholderSpanFlow(@NonNull String source) {
     this.source = new StringBuilder(source);
     this.elements = new ArrayDeque<>();
+    this.dynamicProcessor = new DynamicImageSpanProcessor();
+  }
+
+  public PlaceholderSpanFlow loader(@NonNull SpanImageLoader loader) {
+    this.dynamicProcessor.setImageLoader(loader);
+    return this;
   }
 
   /**
@@ -117,28 +125,10 @@ public final class PlaceholderSpanFlow {
     return this;
   }
 
-  public PlaceholderSpanFlow dynamicImage(@NonNull SpanImageLoader loader, @Nullable String url, @Px int size) {
-    IndexerProcessor.DynamicProxy proxy = new IndexerProcessor.DynamicProxy();
+  public PlaceholderSpanFlow image(@NonNull String url, @Px int size) {
+    IndexerProcessor.DynamicProxy proxy = new IndexerProcessor.DynamicProxy(size);
     handleHeadPlaceHolder(" ", proxy);
-
-    loader.load(url, new SpanImageLoader.Callback() {
-      @Override
-      public void onSuccess(@NonNull Bitmap resource) {
-        // todo 注册为异步的? Span????
-        // 后面再更新即可 ????
-        // todo 需要再次调用 textView#setText()
-        Log.e("UUUUU", "load image success");
-        IndexerProcessor.Image processor = new IndexerProcessor.Image(resource, size, AlignImageSpan.VERTICAL_ALIGN_CENTER);
-        proxy.invalidate(processor);
-      }
-
-      @Override
-      public void onError(@Nullable Bitmap error) {
-        if (error != null) {
-        }
-      }
-    });
-
+    dynamicProcessor.register(url, proxy);
     return this;
   }
 
@@ -162,7 +152,17 @@ public final class PlaceholderSpanFlow {
   }
 
   public void inject(TextView textView) {
-    Spans.inject(textView, end(), clickable);
+    boolean dynamic = dynamicProcessor.isDynamic();
+    Spannable spannable = end();
+    Spans.inject(textView, end(), clickable, false);
+    if (dynamic) {
+      dynamicProcessor.loadAllImages(new DynamicImageSpanProcessor.Listener() {
+        @Override
+        public void onFinish() {
+          textView.setText(spannable);
+        }
+      });
+    }
   }
 
   /**

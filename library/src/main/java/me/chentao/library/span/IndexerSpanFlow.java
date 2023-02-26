@@ -73,7 +73,7 @@ public final class IndexerSpanFlow {
   }
 
   public void inject(@NonNull TextView textView) {
-    Spans.inject(textView, spannable, clickable);
+    Spans.inject(textView, spannable, clickable, false);
   }
 
 }

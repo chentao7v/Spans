@@ -102,7 +102,7 @@ public final class SpliceSpanFlow {
    * 将所有 Span 注入到 {@link TextView} 中
    */
   public void inject(TextView textView) {
-    Spans.inject(textView, end(), clickable);
+    Spans.inject(textView, end(), clickable, false);
   }
 
   /**

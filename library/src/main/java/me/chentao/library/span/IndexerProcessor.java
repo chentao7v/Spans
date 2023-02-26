@@ -14,6 +14,7 @@ import android.view.View;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.Px;
 import java.util.Collection;
 
 /**
@@ -126,6 +127,13 @@ public interface IndexerProcessor {
     private int start;
     private int end;
 
+    @Px
+    private final int size;
+
+    public DynamicProxy(@Px int size) {
+      this.size = size;
+    }
+
     @Override
     public void apply(Spannable spannable, int start, int end) {
       this.spannable = spannable;
@@ -150,6 +158,10 @@ public interface IndexerProcessor {
       return end;
     }
 
+    @Px
+    public int getSize() {
+      return size;
+    }
   }
 
   /**
