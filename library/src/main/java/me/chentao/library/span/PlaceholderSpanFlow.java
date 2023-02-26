@@ -152,13 +152,14 @@ public final class PlaceholderSpanFlow {
 
   public void inject(TextView textView) {
     boolean async = asyncEngine.containsAsync();
-    Spannable spannable = end();
-    Spans.inject(textView, spannable, clickable, async);
+    Spans.inject(textView, end(), clickable, async);
+
     if (async) {
-      asyncEngine.loadAllImages(new AsyncImageSpanEngine.Listener() {
+      Spannable text = (Spannable) textView.getText();
+      asyncEngine.loadAllImages(text, new AsyncImageSpanEngine.Listener() {
         @Override
         public void onFinish() {
-          textView.setText(spannable);
+          textView.invalidate();
         }
       });
     }

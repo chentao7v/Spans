@@ -1,6 +1,7 @@
 package me.chentao.library.span;
 
 import android.graphics.Bitmap;
+import android.text.Spannable;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import java.util.LinkedList;
@@ -34,7 +35,7 @@ public final class AsyncImageSpanEngine {
     }
   }
 
-  public void loadAllImages(@NonNull Listener listener) {
+  public void loadAllImages(@NonNull Spannable spannable, @NonNull Listener listener) {
     int size = urls.size();
 
     for (int i = 0; i < size; i++) {
@@ -48,24 +49,24 @@ public final class AsyncImageSpanEngine {
       loader.load(url, new SpanImageLoader.Callback() {
         @Override
         public void onSuccess(@NonNull Bitmap resource) {
-          update(resource, proxy, listener);
+          update(spannable, resource, proxy, listener);
         }
 
         @Override
         public void onError(@Nullable Bitmap error) {
-          update(error, proxy, listener);
+          update(spannable, error, proxy, listener);
         }
       });
     }
   }
 
-  private void update(@Nullable Bitmap resource, IndexerProcessor.DynamicProxy proxy, @NonNull Listener listener) {
+  private void update(@NonNull Spannable spannable, @Nullable Bitmap resource, IndexerProcessor.DynamicProxy proxy, @NonNull Listener listener) {
     if (resource != null) {
       IndexerProcessor.Image image = new IndexerProcessor.Image(
         resource,
         proxy.getSize(),
         AlignImageSpan.VERTICAL_ALIGN_CENTER);
-      proxy.invalidate(image);
+      proxy.update(spannable, image);
     }
 
     counter.incrementAndGet();

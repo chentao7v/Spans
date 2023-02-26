@@ -122,8 +122,6 @@ public interface IndexerProcessor {
 
   class DynamicProxy implements IndexerProcessor {
 
-    @Nullable
-    private Spannable spannable;
     private int start;
     private int end;
 
@@ -136,12 +134,11 @@ public interface IndexerProcessor {
 
     @Override
     public void apply(Spannable spannable, int start, int end) {
-      this.spannable = spannable;
       this.start = start;
       this.end = end;
     }
 
-    public void invalidate(@NonNull IndexerProcessor processor) {
+    public void update(@NonNull Spannable spannable, @NonNull IndexerProcessor processor) {
       processor.apply(spannable, start, end);
     }
 
