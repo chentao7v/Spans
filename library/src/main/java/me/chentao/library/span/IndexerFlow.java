@@ -4,6 +4,7 @@ import android.text.Spannable;
 import android.widget.TextView;
 import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
+import me.chentao.library.span.image.SpanImageLoader;
 
 /**
  * 通过索引的方式设置 Span
@@ -12,7 +13,7 @@ import androidx.annotation.NonNull;
  * <br>
  * create by chentao on 2023-02-23.
  */
-public final class IndexerFlow {
+public final class IndexerFlow implements Flow<IndexerFlow> {
 
   private final IndexerEngine engine;
 
@@ -39,16 +40,18 @@ public final class IndexerFlow {
     return this;
   }
 
-  /**
-   * @see Engine#execute()
-   */
+  @Override
+  public IndexerFlow loader(@NonNull SpanImageLoader loader) {
+    this.engine.setImageLoader(loader);
+    return this;
+  }
+
+  @Override
   public Spannable execute() {
     return engine.execute();
   }
 
-  /**
-   * @see Engine#inject(TextView)
-   */
+  @Override
   public void inject(@NonNull TextView textView) {
     engine.inject(textView);
   }

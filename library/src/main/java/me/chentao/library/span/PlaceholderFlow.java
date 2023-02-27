@@ -10,7 +10,7 @@ import me.chentao.library.span.image.SpanImageLoader;
  * <br>
  * create by chentao on 2023-02-23.
  */
-public final class PlaceholderFlow {
+public final class PlaceholderFlow implements Flow<PlaceholderFlow> {
 
   public static final String HOLDER = "{$}";
 
@@ -42,24 +42,18 @@ public final class PlaceholderFlow {
     return this;
   }
 
-  /**
-   * @see Engine#setImageLoader(SpanImageLoader)
-   */
+  @Override
   public PlaceholderFlow loader(@NonNull SpanImageLoader loader) {
     engine.setImageLoader(loader);
     return this;
   }
 
-  /**
-   * @see Engine#execute()
-   */
+  @Override
   public Spannable execute() {
     return engine.execute();
   }
 
-  /**
-   * @see Engine#inject(TextView)
-   */
+  @Override
   public void inject(TextView textView) {
     engine.inject(textView);
   }
