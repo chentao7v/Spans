@@ -1,6 +1,8 @@
 package me.chentao.library.span;
 
+import android.graphics.Color;
 import android.text.Spannable;
+import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import me.chentao.library.span.image.AsyncImageEngine;
@@ -24,8 +26,6 @@ public abstract class Engine {
   public void setImageLoader(@NonNull SpanImageLoader loader) {
     this.asyncEngine.setImageLoader(loader);
   }
-
-
 
   /**
    * 将 {@link Config} 解析为 {@link Processor}。
@@ -87,7 +87,7 @@ public abstract class Engine {
   public void inject(TextView textView) {
     Spannable spannable = execute();
     boolean async = asyncEngine.containsAsync();
-    Spans.inject(textView, spannable, clickable, async);
+    inject(textView, spannable, clickable, async);
     if (async) {
       Spannable text = (Spannable) textView.getText();
       asyncEngine.loadAllImages(text, new AsyncImageEngine.Listener() {
@@ -97,6 +97,23 @@ public abstract class Engine {
         }
       });
     }
+  }
+
+  private static void inject(@NonNull TextView textView, Spannable spannable, boolean clickable, boolean async) {
+    if (async) {
+      textView.setText(spannable, TextView.BufferType.SPANNABLE);
+    } else {
+      textView.setText(spannable);
+    }
+    if (clickable) {
+      markClickable(textView);
+    }
+  }
+
+  private static void markClickable(@NonNull TextView textView) {
+    textView.setMovementMethod(LinkMovementMethod.getInstance());
+    textView.setLongClickable(false);
+    textView.setHighlightColor(Color.TRANSPARENT);
   }
 
 }

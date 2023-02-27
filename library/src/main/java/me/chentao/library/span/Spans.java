@@ -1,11 +1,5 @@
 package me.chentao.library.span;
 
-import android.graphics.Color;
-import android.text.Spannable;
-import android.text.method.LinkMovementMethod;
-import android.widget.TextView;
-import androidx.annotation.NonNull;
-
 /**
  * 对 Span 进行处理的工具。
  * <br>
@@ -41,23 +35,6 @@ public final class Spans {
    */
   public static PlaceholderFlow placeholder(String source) {
     return new PlaceholderFlow(source);
-  }
-
-  private static void markClickable(@NonNull TextView textView) {
-    textView.setMovementMethod(LinkMovementMethod.getInstance());
-    textView.setLongClickable(false);
-    textView.setHighlightColor(Color.TRANSPARENT);
-  }
-
-  static void inject(@NonNull TextView textView, Spannable spannable, boolean clickable, boolean async) {
-    if (async) {
-      textView.setText(spannable, TextView.BufferType.SPANNABLE);
-    } else {
-      textView.setText(spannable);
-    }
-    if (clickable) {
-      markClickable(textView);
-    }
   }
 
 }
