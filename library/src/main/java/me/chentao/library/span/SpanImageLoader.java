@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
  */
 public interface SpanImageLoader {
 
-  void load(@Nullable String url, @Nullable Callback callback);
+  void load(@Nullable String url, @NonNull Callback callback);
 
   interface Callback {
 

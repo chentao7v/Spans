@@ -10,19 +10,19 @@ import androidx.annotation.NonNull;
 public abstract class Engine {
 
   @NonNull
-  protected final AsyncImageHandler asyncHandler;
+  protected final AsyncImageEngine asyncEngine;
 
   private boolean clickable;
 
   public Engine() {
-    this.asyncHandler = new AsyncImageHandler();
+    this.asyncEngine = new AsyncImageEngine();
   }
 
   public void setImageLoader(@NonNull SpanImageLoader loader) {
-    this.asyncHandler.setImageLoader(loader);
+    this.asyncEngine.setImageLoader(loader);
   }
 
-  protected IndexerProcessor convert(@NonNull Config config) {
+  protected IndexerProcessor parse(@NonNull Config config) {
     IndexerProcessor.ComposeProcessor compose = new IndexerProcessor.ComposeProcessor();
 
     if (config instanceof Config.Default) {
@@ -61,7 +61,7 @@ public abstract class Engine {
       } else if (c.getUrl() != null) {
         IndexerProcessor.DynamicProxy proxy = new IndexerProcessor.DynamicProxy(c.getWidth(), c.getVerticalAlign());
         compose.addProcessor(proxy);
-        asyncHandler.register(c.getUrl(), proxy);
+        asyncEngine.register(c.getUrl(), proxy);
       }
     }
     return compose;
@@ -69,11 +69,11 @@ public abstract class Engine {
 
   public void inject(TextView textView) {
     Spannable spannable = end();
-    boolean async = asyncHandler.containsAsync();
+    boolean async = asyncEngine.containsAsync();
     Spans.inject(textView, spannable, clickable, async);
     if (async) {
       Spannable text = (Spannable) textView.getText();
-      asyncHandler.loadAllImages(text, new AsyncImageHandler.Listener() {
+      asyncEngine.loadAllImages(text, new AsyncImageEngine.Listener() {
         @Override
         public void onComplete() {
           textView.invalidate();

@@ -24,7 +24,7 @@ public final class PlaceholderEngine extends Engine {
   }
 
   public void replace(@NonNull String data, @NonNull Config config) {
-    IndexerProcessor processor = convert(config);
+    IndexerProcessor processor = parse(config);
     handleHeadPlaceHolder(data, processor);
   }
 

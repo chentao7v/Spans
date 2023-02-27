@@ -25,7 +25,7 @@ public final class PlaceholderSpanFlow {
     return this;
   }
 
-  public PlaceholderSpanFlow replace(@NonNull Config.Image image) {
+  public PlaceholderSpanFlow replace(@NonNull Config image) {
     engine.replace(" ", image);
     return this;
   }

@@ -1,6 +1,5 @@
 package me.chentao.span.simple
 
-import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
@@ -15,20 +14,20 @@ import me.chentao.span.appContext
  */
 class GlideImageLoader : SpanImageLoader {
 
-  override fun load(url: String?, callback: SpanImageLoader.Callback?) {
+  override fun load(url: String?, callback: SpanImageLoader.Callback) {
     Glide.with(appContext)
       .asDrawable()
       .placeholder(R.drawable.mini_icon4)
       .load(url)
       .into(object : SimpleTarget<Drawable>() {
         override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
-          callback?.onSuccess(resource)
+          callback.onSuccess(resource)
         }
 
         override fun onLoadStarted(placeholder: Drawable?) {
           super.onLoadStarted(placeholder)
           if (placeholder != null) {
-            callback?.onSuccess(placeholder)
+            callback.onSuccess(placeholder)
           }
         }
       })

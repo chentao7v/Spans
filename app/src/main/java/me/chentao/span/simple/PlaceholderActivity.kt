@@ -67,6 +67,9 @@ class PlaceholderActivity : AppCompatActivity() {
           .url(IMAGE_URL)
           .verticalAlign(VERTICAL_ALIGN_BOTTOM)
           .width(80.dp)
+          .click {
+            Log.d(TAG, "哈哈哈哈哈")
+          }
       )
       .loader(GlideImageLoader())
       .inject(tvMsg)

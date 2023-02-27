@@ -9,6 +9,12 @@ import androidx.annotation.Nullable;
 import androidx.annotation.Px;
 
 /**
+ * Span 的配置。
+ * <br>
+ * 普通文字的配置：{@link Default}，通过 {@link Config#ofDefault()} 完成。
+ * <br>
+ * 图片的配置：{@link Image}，通过 {@link Config#ofImage()} 完成。
+ * <br>
  * create by chentao on 2023-02-26.
  */
 public interface Config {
@@ -28,7 +34,7 @@ public interface Config {
     private View.OnClickListener listener;
 
     @Nullable
-    public View.OnClickListener getListener() {
+    View.OnClickListener getListener() {
       return listener;
     }
 
@@ -53,12 +59,16 @@ public interface Config {
 
     private Default() {}
 
-    public int getColor() {
+    int getColor() {
       return color;
     }
 
-    public int getSize() {
+    int getSize() {
       return size;
+    }
+
+    boolean isBold() {
+      return bold;
     }
 
     public Default color(@ColorInt int color) {
@@ -76,9 +86,6 @@ public interface Config {
       return this;
     }
 
-    public boolean isBold() {
-      return bold;
-    }
   }
 
   /**
@@ -123,31 +130,31 @@ public interface Config {
       return this;
     }
 
-    public int getWidth() {
-      return width;
-    }
-
-    @Nullable
-    public Bitmap getBitmap() {
-      return bitmap;
-    }
-
-    @Nullable
-    public Drawable getDrawable() {
-      return drawable;
-    }
-
     public Image verticalAlign(@AlignImageSpan.VerticalAlign int verticalAlign) {
       this.verticalAlign = verticalAlign;
       return this;
     }
 
-    public int getVerticalAlign() {
+    int getWidth() {
+      return width;
+    }
+
+    @Nullable
+    Bitmap getBitmap() {
+      return bitmap;
+    }
+
+    @Nullable
+    Drawable getDrawable() {
+      return drawable;
+    }
+
+    int getVerticalAlign() {
       return verticalAlign;
     }
 
     @Nullable
-    public String getUrl() {
+    String getUrl() {
       return url;
     }
   }

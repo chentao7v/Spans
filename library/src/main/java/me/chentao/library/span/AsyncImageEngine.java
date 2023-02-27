@@ -12,9 +12,11 @@ import java.util.List;
  * <br>
  * create by chentao on 2023-02-26.
  */
-public final class AsyncImageHandler {
+public final class AsyncImageEngine {
 
+  @NonNull
   private final List<String> urls = new LinkedList<>();
+  @NonNull
   private final List<IndexerProcessor.DynamicProxy> processors = new LinkedList<>();
 
   @Nullable

@@ -31,7 +31,7 @@ public interface IndexerProcessor {
     @NonNull
     private final List<IndexerProcessor> processors = new ArrayList<>();
 
-    public void addProcessor(IndexerProcessor processor) {
+    public void addProcessor(@NonNull IndexerProcessor processor) {
       this.processors.add(processor);
     }
 
@@ -47,7 +47,7 @@ public interface IndexerProcessor {
     @ColorInt
     private final int color;
 
-    public Color(int color) {
+    public Color(@ColorInt int color) {
       this.color = color;
     }
 

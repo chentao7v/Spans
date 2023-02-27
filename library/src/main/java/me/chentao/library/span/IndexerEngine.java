@@ -18,7 +18,7 @@ public final class IndexerEngine extends Engine {
   }
 
   public void add(int start, int end, @NonNull Config config) {
-    IndexerProcessor processor = convert(config);
+    IndexerProcessor processor = parse(config);
     processor.apply(spannable, start, end);
   }
 
