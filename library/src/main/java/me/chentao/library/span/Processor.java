@@ -155,7 +155,11 @@ public interface Processor {
 
     @Override
     public void apply(Spannable spannable, int start, int end) {
-      image.setScaleBounds(width);
+      if (width == Config.NONE) {
+        image.setBounds();
+      } else {
+        image.setScaleBounds(width);
+      }
       spannable.setSpan(image, start, end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
     }
   }

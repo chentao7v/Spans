@@ -43,6 +43,7 @@ class IndexerActivity : AppCompatActivity() {
       .add(7, 30, Config.ofDefault().click {
         Toast.makeText(this, "哈哈哈哈", Toast.LENGTH_SHORT).show()
       })
+      .addImage(7, Config.ofImage().drawable(drawableRes(R.drawable.mini_icon3)).width(50.dp))
       .inject(tvMsg)
   }
 

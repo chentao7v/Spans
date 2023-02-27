@@ -25,12 +25,17 @@ public final class IndexerFlow {
    *
    * @param config 具体的效果
    */
-  public IndexerFlow add(@IntRange(from = 0) int start, @IntRange(from = 0) int end, @NonNull Config config) {
+  public IndexerFlow add(@IntRange(from = 0) int start, @IntRange(from = 0) int end, @NonNull Config.Default config) {
     if (start >= end) {
       throw new IllegalArgumentException("start(" + start + ") < end(" + end + ")");
     }
 
     engine.add(start, end, config);
+    return this;
+  }
+
+  public IndexerFlow addImage(@IntRange(from = 0) int index, @NonNull Config.Image image) {
+    engine.add(index, index + 1, image);
     return this;
   }
 
