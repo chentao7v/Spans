@@ -37,7 +37,7 @@ public final class PlaceholderFlow {
    *
    * @param image 图片的配置
    */
-  public PlaceholderFlow withImage(@NonNull Config image) {
+  public PlaceholderFlow withImage(@NonNull Config.Image image) {
     engine.replace(" ", image);
     return this;
   }
@@ -58,7 +58,7 @@ public final class PlaceholderFlow {
   }
 
   /**
-   * @see Engine#inject(TextView)Ï
+   * @see Engine#inject(TextView)
    */
   public void inject(TextView textView) {
     engine.inject(textView);

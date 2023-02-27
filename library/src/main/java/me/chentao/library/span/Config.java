@@ -31,9 +31,9 @@ public interface Config {
   }
 
   /**
-   * 点击事件。
+   * 点击事件
    */
-  class Click implements Config {
+  class Click<T extends Config> implements Config {
     @Nullable
     private View.OnClickListener listener;
 
@@ -42,16 +42,16 @@ public interface Config {
       return listener;
     }
 
-    public Click click(@NonNull View.OnClickListener listener) {
+    public T click(@NonNull View.OnClickListener listener) {
       this.listener = listener;
-      return this;
+      return (T) this;
     }
   }
 
   /**
    * 默认配置
    */
-  final class Default extends Click {
+  final class Default extends Click<Default> {
 
     @ColorInt
     private int color = NONE;
@@ -95,7 +95,7 @@ public interface Config {
   /**
    * 图片配置
    */
-  final class Image extends Click {
+  final class Image extends Click<Image> {
 
     @Px
     private int width = NONE;

@@ -24,20 +24,20 @@ import me.chentao.library.span.image.AlignImageSpan;
  * <br>
  * create by chentao on 2023-02-23.
  */
-public interface IndexerProcessor {
+public interface Processor {
 
   /**
    * 处理效果处理器。可完成对一组效果的处理。
    */
-  final class ComposeProcessor implements IndexerProcessor {
+  final class ComposeProcessor implements Processor {
 
     @NonNull
-    private final List<IndexerProcessor> processors = new ArrayList<>();
+    private final List<Processor> processors = new ArrayList<>();
 
     /**
      * 添加一个处理器。
      */
-    public void addProcessor(@NonNull IndexerProcessor processor) {
+    public void addProcessor(@NonNull Processor processor) {
       this.processors.add(processor);
     }
 
@@ -46,7 +46,7 @@ public interface IndexerProcessor {
      */
     @Override
     public void apply(Spannable spannable, int start, int end) {
-      for (IndexerProcessor processor : this.processors) {
+      for (Processor processor : this.processors) {
         processor.apply(spannable, start, end);
       }
     }
@@ -55,7 +55,7 @@ public interface IndexerProcessor {
   /**
    * 颜色处理器
    */
-  final class Color implements IndexerProcessor {
+  final class Color implements Processor {
     @ColorInt
     private final int color;
 
@@ -72,7 +72,7 @@ public interface IndexerProcessor {
   /**
    * 点击事件处理器
    */
-  final class Click implements IndexerProcessor {
+  final class Click implements Processor {
 
     @ColorInt
     private final int color;
@@ -108,7 +108,7 @@ public interface IndexerProcessor {
   /**
    * 加粗处理器
    */
-  final class Bold implements IndexerProcessor {
+  final class Bold implements Processor {
 
     @Override
     public void apply(Spannable spannable, int start, int end) {
@@ -119,7 +119,7 @@ public interface IndexerProcessor {
   /**
    * 文字大小处理器
    */
-  final class Size implements IndexerProcessor {
+  final class Size implements Processor {
 
     private final int size;
 
@@ -136,7 +136,7 @@ public interface IndexerProcessor {
   /**
    * 本地图片处理器
    */
-  class Image implements IndexerProcessor {
+  class Image implements Processor {
 
     @NonNull
     private final AlignImageSpan image;
@@ -163,7 +163,7 @@ public interface IndexerProcessor {
   /**
    * 异步代理处理器。用来处理异步下载图片的场景。
    */
-  class AsyncProxy implements IndexerProcessor {
+  class AsyncProxy implements Processor {
 
     private int start;
     private int end;
@@ -188,7 +188,7 @@ public interface IndexerProcessor {
     /**
      * 图片下载完成后，再更新 Span。
      */
-    public void update(@NonNull Spannable spannable, @NonNull IndexerProcessor processor) {
+    public void update(@NonNull Spannable spannable, @NonNull Processor processor) {
       processor.apply(spannable, start, end);
     }
 
@@ -208,9 +208,9 @@ public interface IndexerProcessor {
   class Element {
     private final int start;
     private final int length;
-    private final IndexerProcessor processor;
+    private final Processor processor;
 
-    public Element(IndexerProcessor processor, int start, int length) {
+    public Element(Processor processor, int start, int length) {
       this.processor = processor;
       this.start = start;
       this.length = length;
@@ -228,7 +228,7 @@ public interface IndexerProcessor {
       return length;
     }
 
-    public IndexerProcessor processor() {
+    public Processor processor() {
       return processor;
     }
   }

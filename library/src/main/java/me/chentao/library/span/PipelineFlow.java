@@ -1,16 +1,8 @@
 package me.chentao.library.span;
 
 import android.text.Spannable;
-import android.text.SpannableStringBuilder;
-import android.view.View;
 import android.widget.TextView;
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.Px;
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.Queue;
 
 /**
  * 通过拼接的方式设置 Span。
@@ -21,113 +13,33 @@ import java.util.Queue;
  */
 public final class PipelineFlow {
 
-  private final Deque<Spannable> spans;
-
-  private boolean clickable;
-
-  PipelineFlow() {
-    spans = new ArrayDeque<>();
-  }
+  @NonNull
+  private final PipelineEngine engine = new PipelineEngine();
 
   /**
-   * 给指定的 {@link CharSequence} 添加点击事件和颜色
+   * 添加文本，并给该文本设置 Span
+   *
+   * @param config Span 对应配置
    */
-  public PipelineFlow click(CharSequence source, @ColorInt int color, @Nullable View.OnClickListener listener) {
-    this.clickable = true;
-    spans.add(new PipelineProcessor.Click(color, listener).apply(source));
+  public PipelineFlow add(@NonNull String source, @NonNull Config config) {
+    engine.add(source, config);
     return this;
   }
 
   /**
-   * 给指定的 {@link CharSequence} 添加点击事件
+   * 添加图片
    */
-  public PipelineFlow click(CharSequence source, @Nullable View.OnClickListener listener) {
-    return click(source, -1, listener);
-  }
-
-  /**
-   * 给最近一个 Span 添加点击事件和颜色
-   */
-  public PipelineFlow click(@ColorInt int color, @Nullable View.OnClickListener listener) {
-    this.clickable = true;
-    applySpanForLast(new PipelineProcessor.OverlayClick(color, listener));
+  public PipelineFlow addImage(@NonNull Config.Image config) {
+    engine.add(" ", config);
     return this;
   }
 
-  /**
-   * 给最近一个 Span 添加点击事件
-   */
-  public PipelineFlow click(@Nullable View.OnClickListener listener) {
-    return click(-1, listener);
+  public Spannable execute() {
+    return engine.execute();
   }
 
-  /**
-   * 给指定的 {@link CharSequence} 添加设置颜色
-   */
-  public PipelineFlow color(CharSequence source, @ColorInt int color) {
-    spans.add(new PipelineProcessor.Color(color).apply(source));
-    return this;
-  }
-
-  /**
-   * 对最近的一个 Span 进行加粗
-   */
-  public PipelineFlow bold() {
-    applySpanForLast(new PipelineProcessor.Bold());
-    return this;
-  }
-
-  /**
-   * 最近一个 Span 设置指定大小
-   */
-  public PipelineFlow size(@Px int size) {
-    applySpanForLast(new PipelineProcessor.Size(size));
-    return this;
-  }
-
-  private void applySpanForLast(PipelineProcessor<Spannable, ?> pipeline) {
-    Spannable last = spans.getLast();
-    if (last == null) {
-      return;
-    }
-    pipeline.apply(last);
-  }
-
-  public PipelineFlow clickable() {
-    this.clickable = true;
-    return this;
-  }
-
-  /**
-   * 将所有 Span 注入到 {@link TextView} 中
-   */
-  public void inject(TextView textView) {
-    Spans.inject(textView, end(), clickable, false);
-  }
-
-  /**
-   * 返回生成的 Span
-   */
-  public Spannable end() {
-    Spannable data = convert(spans);
-    spans.clear();
-    return data;
-  }
-
-  /**
-   * 转换为 {@link IndexerFlow}
-   */
-  public IndexerFlow toIndex() {
-    Spannable spannable = end();
-    return Spans.indexer(spannable);
-  }
-
-  private static Spannable convert(@NonNull Queue<Spannable> queue) {
-    SpannableStringBuilder sb = new SpannableStringBuilder();
-    for (Spannable spannable : queue) {
-      sb.append(spannable);
-    }
-    return sb;
+  public void inject(@NonNull TextView textView) {
+    engine.inject(textView);
   }
 
 }

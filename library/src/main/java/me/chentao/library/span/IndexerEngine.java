@@ -19,11 +19,12 @@ public final class IndexerEngine extends Engine {
   }
 
   public void add(int start, int end, @NonNull Config config) {
-    IndexerProcessor processor = parse(config);
+    Processor processor = parse(config);
     // 添加时完成 Span 的处理。
     processor.apply(spannable, start, end);
   }
 
+  @NonNull
   @Override
   public Spannable execute() {
     return this.spannable;

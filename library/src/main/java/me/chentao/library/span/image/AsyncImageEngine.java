@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import java.util.LinkedList;
 import java.util.List;
-import me.chentao.library.span.IndexerProcessor;
+import me.chentao.library.span.Processor;
 
 /**
  * 异步图片处理引擎。
@@ -18,12 +18,12 @@ public final class AsyncImageEngine {
   @NonNull
   private final List<String> urls = new LinkedList<>();
   @NonNull
-  private final List<IndexerProcessor.AsyncProxy> processors = new LinkedList<>();
+  private final List<Processor.AsyncProxy> processors = new LinkedList<>();
 
   @Nullable
   private SpanImageLoader loader;
 
-  public void register(@NonNull String url, @NonNull IndexerProcessor.AsyncProxy processor) {
+  public void register(@NonNull String url, @NonNull Processor.AsyncProxy processor) {
     urls.add(url);
     processors.add(processor);
   }
@@ -41,7 +41,7 @@ public final class AsyncImageEngine {
 
     for (int i = 0; i < size; i++) {
       String url = urls.get(i);
-      IndexerProcessor.AsyncProxy proxy = processors.get(i);
+      Processor.AsyncProxy proxy = processors.get(i);
 
       if (loader == null) {
         throw new NullPointerException("call #load(SpanImageLoader) first !! ");
@@ -64,9 +64,9 @@ public final class AsyncImageEngine {
   /**
    * 图片下载完成后，再使用 ImageSpan 去更新 TextView
    */
-  private void update(@NonNull Spannable spannable, @Nullable Drawable resource, IndexerProcessor.AsyncProxy proxy, @NonNull Listener listener) {
+  private void update(@NonNull Spannable spannable, @Nullable Drawable resource, Processor.AsyncProxy proxy, @NonNull Listener listener) {
     if (resource != null) {
-      IndexerProcessor.Image image = new IndexerProcessor.Image(
+      Processor.Image image = new Processor.Image(
         resource,
         proxy.getSize(),
         proxy.getVerticalAlign());

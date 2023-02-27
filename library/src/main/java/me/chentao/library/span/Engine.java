@@ -25,11 +25,13 @@ public abstract class Engine {
     this.asyncEngine.setImageLoader(loader);
   }
 
+
+
   /**
-   * 将 {@link Config} 解析为 {@link IndexerProcessor}。
+   * 将 {@link Config} 解析为 {@link Processor}。
    */
-  protected IndexerProcessor parse(@NonNull Config config) {
-    IndexerProcessor.ComposeProcessor compose = new IndexerProcessor.ComposeProcessor();
+  protected Processor parse(@NonNull Config config) {
+    Processor.ComposeProcessor compose = new Processor.ComposeProcessor();
 
     if (config instanceof Config.Default) {
       // 处理常见操作
@@ -37,19 +39,19 @@ public abstract class Engine {
 
       if (c.getListener() != null) {
         this.clickable = true;
-        compose.addProcessor(new IndexerProcessor.Click(c.getColor(), c.getListener()));
+        compose.addProcessor(new Processor.Click(c.getColor(), c.getListener()));
       }
 
       if (c.getColor() != Config.NONE) {
-        compose.addProcessor(new IndexerProcessor.Color(c.getColor()));
+        compose.addProcessor(new Processor.Color(c.getColor()));
       }
 
       if (c.isBold()) {
-        compose.addProcessor(new IndexerProcessor.Bold());
+        compose.addProcessor(new Processor.Bold());
       }
 
       if (c.getSize() != Config.NONE) {
-        compose.addProcessor(new IndexerProcessor.Size(c.getSize()));
+        compose.addProcessor(new Processor.Size(c.getSize()));
       }
 
     } else if (config instanceof Config.Image) {
@@ -57,15 +59,15 @@ public abstract class Engine {
       Config.Image c = (Config.Image) config;
       if (c.getListener() != null) {
         this.clickable = true;
-        compose.addProcessor(new IndexerProcessor.Click(Config.NONE, c.getListener()));
+        compose.addProcessor(new Processor.Click(Config.NONE, c.getListener()));
       }
 
       if (c.getBitmap() != null) {
-        compose.addProcessor(new IndexerProcessor.Image(c.getBitmap(), c.getWidth(), c.getVerticalAlign()));
+        compose.addProcessor(new Processor.Image(c.getBitmap(), c.getWidth(), c.getVerticalAlign()));
       } else if (c.getDrawable() != null) {
-        compose.addProcessor(new IndexerProcessor.Image(c.getDrawable(), c.getWidth(), c.getVerticalAlign()));
+        compose.addProcessor(new Processor.Image(c.getDrawable(), c.getWidth(), c.getVerticalAlign()));
       } else if (c.getUrl() != null) {
-        IndexerProcessor.AsyncProxy proxy = new IndexerProcessor.AsyncProxy(c.getWidth(), c.getVerticalAlign());
+        Processor.AsyncProxy proxy = new Processor.AsyncProxy(c.getWidth(), c.getVerticalAlign());
         compose.addProcessor(proxy);
         asyncEngine.register(c.getUrl(), proxy);
       }
@@ -76,6 +78,7 @@ public abstract class Engine {
   /**
    * 返回处理过的文本 {@link Spannable}。
    */
+  @NonNull
   public abstract Spannable execute();
 
   /**
