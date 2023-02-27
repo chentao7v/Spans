@@ -71,7 +71,7 @@ class PlaceholderActivity : AppCompatActivity() {
           }
       )
       .loader(GlideImageLoader())
-      .inject(tvMsg)
+      .into(tvMsg)
   }
 
 }

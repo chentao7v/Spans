@@ -52,7 +52,7 @@ public final class IndexerFlow implements Flow<IndexerFlow> {
   }
 
   @Override
-  public void inject(@NonNull TextView textView) {
+  public void into(@NonNull TextView textView) {
     engine.inject(textView);
   }
 

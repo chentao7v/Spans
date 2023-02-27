@@ -49,7 +49,7 @@ class PipelineActivity : AppCompatActivity() {
       .add(msg3, Configs.text().color(colorRes(R.color.teal_200)).bold())
       .addImage(Configs.image().drawable(drawableRes(R.drawable.mini_icon6)))
       .add(msg4, Configs.text().color(colorRes(R.color.teal_700)))
-      .inject(tvMsg)
+      .into(tvMsg)
   }
 
 }

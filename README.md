@@ -144,7 +144,7 @@ Spans.placeholder(msg)
 	)
 	// 指定图片加载器
 	.loader(GlideImageLoader())
-	.inject(tvMsg)
+	.into(tvMsg)
 ```
 
 最终效果如下：
@@ -176,7 +176,7 @@ Spans.indexer(msg)
     Toast.makeText(this, "哈哈哈哈", Toast.LENGTH_SHORT).show()
   })
   .addImage(7, Configs.image().drawable(drawableRes(R.drawable.mini_icon3)).width(50.dp))
-  .inject(tvMsg)
+  .into(tvMsg)
 ```
 
 
@@ -214,6 +214,6 @@ Spans.pipeline()
   .add(msg3, Configs.text().color(colorRes(R.color.teal_200)).bold())
   .addImage(Configs.image().drawable(drawableRes(R.drawable.mini_icon6))) // 添加图片
   .add(msg4, Configs.text().color(colorRes(R.color.teal_700)))
-  .inject(tvMsg)
+  .into(tvMsg)
 ```
 

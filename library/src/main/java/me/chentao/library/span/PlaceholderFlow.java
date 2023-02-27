@@ -54,7 +54,7 @@ public final class PlaceholderFlow implements Flow<PlaceholderFlow> {
   }
 
   @Override
-  public void inject(TextView textView) {
+  public void into(TextView textView) {
     engine.inject(textView);
   }
 

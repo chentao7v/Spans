@@ -23,6 +23,6 @@ interface Flow<T extends Flow<T>> {
   /**
    * @see Engine#inject(TextView)
    */
-  public void inject(TextView textView);
+  public void into(TextView textView);
 
 }

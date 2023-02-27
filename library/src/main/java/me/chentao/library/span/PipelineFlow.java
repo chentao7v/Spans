@@ -47,7 +47,7 @@ public final class PipelineFlow implements Flow<PipelineFlow> {
   }
 
   @Override
-  public void inject(@NonNull TextView textView) {
+  public void into(@NonNull TextView textView) {
     engine.inject(textView);
   }
 
