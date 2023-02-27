@@ -57,14 +57,14 @@ class PlaceholderActivity : AppCompatActivity() {
           })
       .withImage(
         Configs.image()
-          .drawable(drawableRes(R.drawable.icon_rect))
+          .drawable(drawableRes(R.drawable.mini_icon5))
           .verticalAlign(CENTER)
           .width(50.dp)
       )
       .withImage(
         Configs.image()
           .url(IMAGE_URL)
-          .verticalAlign(CENTER)
+          .verticalAlign(BOTTOM)
           .width(80.dp)
           .click {
             Log.d(TAG, "哈哈哈哈哈")

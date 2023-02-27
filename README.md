@@ -127,7 +127,7 @@ Spans.placeholder(msg)
 	// 使用图片替换第2个占位符
 	.withImage(
 	  Configs.image()
-	    .drawable(drawableRes(R.drawable.mini_icon3))
+	    .drawable(drawableRes(R.drawable.mini_icon5))
 	    .verticalAlign(CENTER)
 	    .width(50.dp)
 	)
