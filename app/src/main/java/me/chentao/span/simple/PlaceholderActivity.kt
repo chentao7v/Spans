@@ -47,14 +47,18 @@ class PlaceholderActivity : AppCompatActivity() {
           .size(30.dp)
           .click {
             Log.i(TAG, "click A ~~~")
-          })
+          }
+      )
       .with("199****9999",
         Configs.text()
           .color(colorRes(R.color.teal_700))
           .size(25.dp)
           .click {
             Log.i(TAG, "click B B !!!")
-          })
+          }
+          .underline()
+          .strikethrough()
+      )
       .withImage(
         Configs.image()
           .drawable(drawableRes(R.drawable.mini_icon5))

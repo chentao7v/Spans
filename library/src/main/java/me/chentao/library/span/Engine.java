@@ -54,6 +54,18 @@ public abstract class Engine {
         compose.addProcessor(new Processor.Size(c.getSize()));
       }
 
+      if (c.getBackgroundColor() != Config.NONE) {
+        compose.addProcessor(new Processor.BackgroundColor(c.getBackgroundColor()));
+      }
+
+      if (c.isUnderline()) {
+        compose.addProcessor(new Processor.Underline());
+      }
+
+      if (c.isStrikethrough()) {
+        compose.addProcessor(new Processor.Strikethrough());
+      }
+
     } else if (config instanceof Config.Image) {
       // 处理图片
       Config.Image c = (Config.Image) config;

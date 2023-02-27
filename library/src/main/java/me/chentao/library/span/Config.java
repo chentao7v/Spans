@@ -53,6 +53,13 @@ public interface Config {
 
     private boolean bold = false;
 
+    private boolean strikethrough = false;
+
+    private boolean underline = false;
+
+    @ColorInt
+    private int backgroundColor = NONE;
+
     Text() {}
 
     int getColor() {
@@ -67,6 +74,18 @@ public interface Config {
       return bold;
     }
 
+    boolean isStrikethrough() {
+      return strikethrough;
+    }
+
+    boolean isUnderline() {
+      return underline;
+    }
+
+    int getBackgroundColor() {
+      return backgroundColor;
+    }
+
     public Text color(@ColorInt int color) {
       this.color = color;
       return this;
@@ -79,6 +98,24 @@ public interface Config {
 
     public Text size(@Px int size) {
       this.size = size;
+      return this;
+    }
+
+    /**
+     * 删除线
+     */
+    public Text strikethrough() {
+      this.strikethrough = true;
+      return this;
+    }
+
+    public Text underline() {
+      this.underline = true;
+      return this;
+    }
+
+    public Text backgroundColor(@ColorInt int color) {
+      this.backgroundColor = color;
       return this;
     }
 

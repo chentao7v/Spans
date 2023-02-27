@@ -7,9 +7,12 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextPaint;
 import android.text.style.AbsoluteSizeSpan;
+import android.text.style.BackgroundColorSpan;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
+import android.text.style.StrikethroughSpan;
 import android.text.style.StyleSpan;
+import android.text.style.UnderlineSpan;
 import android.view.View;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -113,6 +116,46 @@ public interface Processor {
     @Override
     public void apply(Spannable spannable, int start, int end) {
       spannable.setSpan(new StyleSpan(Typeface.BOLD), start, end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+    }
+  }
+
+  /**
+   * 下划线
+   */
+  final class Underline implements Processor {
+
+    @Override
+    public void apply(Spannable spannable, int start, int end) {
+      spannable.setSpan(new UnderlineSpan(), start, end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+    }
+  }
+
+  /**
+   * 删除线
+   */
+  final class Strikethrough implements Processor {
+
+    @Override
+    public void apply(Spannable spannable, int start, int end) {
+      spannable.setSpan(new StrikethroughSpan(), start, end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+    }
+  }
+
+  /**
+   * 背景色
+   */
+  final class BackgroundColor implements Processor {
+
+    @ColorInt
+    private final int color;
+
+    public BackgroundColor(@ColorInt int color) {
+      this.color = color;
+    }
+
+    @Override
+    public void apply(Spannable spannable, int start, int end) {
+      spannable.setSpan(new BackgroundColorSpan(color), start, end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
     }
   }
 
