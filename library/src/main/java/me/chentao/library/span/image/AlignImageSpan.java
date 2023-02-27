@@ -89,7 +89,7 @@ public class AlignImageSpan extends ImageSpan {
     }
 
     Rect rect = drawable.getBounds();
-    Log.d(TAG, "---> " + rect.toString());
+    Log.d(TAG, "drawable：width=" + rect.width() + ", height=" + rect.height());
 
     if (fm != null) {
 
@@ -101,15 +101,14 @@ public class AlignImageSpan extends ImageSpan {
       // Drawable 高度
       int drawableHeight = rect.height();
 
-      int centerY = fontMetrics.top + fontHeight / 2;
-
       if (verticalAlign == CENTER) {
-        fm.ascent = centerY - drawableHeight / 2;
-        fm.descent = centerY + drawableHeight / 2;
+        int centerY = (int) (fontMetrics.top + fontHeight / 2f);
+        fm.ascent = (int) (centerY - drawableHeight / 2f);
+        fm.descent = (int) (centerY + drawableHeight / 2f);
       } else if (verticalAlign == BASELINE) {
         float topPercent = Math.abs(fontMetrics.top) / (fontHeight * 1.f);
         fm.ascent = (int) (drawableHeight * topPercent * -1);
-        fm.descent = (int) (drawableHeight * (1 - topPercent));
+        fm.descent = (int) (drawableHeight * (1f - topPercent));
       } else {
         fm.descent = fontMetrics.descent;
         fm.ascent = fontMetrics.descent - drawableHeight;
@@ -131,7 +130,22 @@ public class AlignImageSpan extends ImageSpan {
     Log.d(TAG, "draw -> top = " + top + ", bottom =  " + bottom + ", y(baseline) = " + y);
 
     canvas.save();
-    canvas.translate(x, top);
+
+    int drawableHeight = b.getBounds().height();
+
+    Log.i(TAG, "drawable height=" + drawableHeight);
+
+    Paint.FontMetricsInt fontMetrics = paint.getFontMetricsInt();
+    if (verticalAlign == CENTER) {
+      int offset = (int) (-(fontMetrics.top + fontMetrics.bottom) / 2f);
+      canvas.translate(x, y - drawableHeight / 2f - offset);
+    } else if (verticalAlign == BASELINE) {
+      float percent = (y - top) / (1f * (bottom - top));
+      canvas.translate(x, y - drawableHeight * percent);
+    } else {
+      canvas.translate(x, y - drawableHeight + fontMetrics.descent);
+    }
+
     b.draw(canvas);
     canvas.restore();
   }

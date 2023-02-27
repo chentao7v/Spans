@@ -6,10 +6,9 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import me.chentao.library.span.image.AlignImageSpan.BOTTOM
-import me.chentao.library.span.image.AlignImageSpan.CENTER
 import me.chentao.library.span.Configs
 import me.chentao.library.span.Spans
+import me.chentao.library.span.image.AlignImageSpan.*
 import me.chentao.span.IMAGE_URL
 import me.chentao.span.R
 
@@ -39,7 +38,7 @@ class PlaceholderActivity : AppCompatActivity() {
 
   private fun simple(tvMsg: TextView) {
 
-    val msg = "对不起，因您已注册的{$}，我们需要核实您的身份{$}及手机号码信息后注册，请插入对应的手机卡{$}并打开该改手机卡{$}流量开关哟。注册成功后，此手机号才会仅分配给您使用。"
+    val msg = "对不起，因您已注册的{$}，我们需要核实您的身份{$}及手机号码信息后注册，请插入对应的手机卡布拉布拉布拉{$}并打改手机卡{$}流量开关哟。注册成功后，此手机号才会仅分配给您使用。"
 
     Spans.placeholder(msg)
       .with("188****8888",
@@ -58,8 +57,8 @@ class PlaceholderActivity : AppCompatActivity() {
           })
       .withImage(
         Configs.image()
-          .drawable(drawableRes(R.drawable.mini_icon3))
-          .verticalAlign(CENTER)
+          .drawable(drawableRes(R.drawable.icon_rect))
+          .verticalAlign(BASELINE)
           .width(50.dp)
       )
       .withImage(
