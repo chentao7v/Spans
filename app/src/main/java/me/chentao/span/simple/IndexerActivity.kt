@@ -4,7 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import me.chentao.library.span.Config
 import me.chentao.library.span.Spans
 import me.chentao.span.R
 
@@ -33,12 +35,15 @@ class IndexerActivity : AppCompatActivity() {
   private fun simple(tvMsg: TextView) {
 
     val msg = "这是一段长文字，需要在第12到XXXX20处高亮，就撒快递费就开了撒金飞达拉卡萨激发的设计阿吉撒京东客服时间啊复健科洒基放大机洒基放大了刷卡机"
-    Spans.indexer(msg)
-      .color(colorRes(R.color.purple_700), 12, 21)
-      .bold(12, 21)
-      .size(18.dp, 12, 21)
-      .inject(tvMsg)
 
+    Spans.indexer(msg)
+      .add(12, 21, Config.ofDefault().color(colorRes(R.color.purple_700)))
+      .add(12, 21, Config.ofDefault().bold())
+      .add(12, 21, Config.ofDefault().size(18.dp))
+      .add(12, 30, Config.ofDefault().click {
+        Toast.makeText(this, "哈哈哈哈", Toast.LENGTH_SHORT).show()
+      })
+      .inject(tvMsg)
   }
 
 }

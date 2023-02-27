@@ -19,7 +19,7 @@ public interface Config {
     return new Default();
   }
 
-  static Image ofImage(){
+  static Image ofImage() {
     return new Image();
   }
 

@@ -14,10 +14,10 @@ public final class PlaceholderSpanFlow {
   public static final String HOLDER = "{$}";
 
   @NonNull
-  private final IndexerEngine engine;
+  private final PlaceholderEngine engine;
 
   PlaceholderSpanFlow(@NonNull String source) {
-    engine = new IndexerEngine(source);
+    engine = new PlaceholderEngine(source);
   }
 
   public PlaceholderSpanFlow replace(@NonNull String data, @NonNull Config config) {
@@ -39,7 +39,7 @@ public final class PlaceholderSpanFlow {
    * 返回处理后的 Span
    */
   public Spannable end() {
-    return engine.finish();
+    return engine.end();
   }
 
   public void inject(TextView textView) {

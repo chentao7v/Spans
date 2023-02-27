@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import me.chentao.library.span.AlignImageSpan.VERTICAL_ALIGN_BASELINE
 import me.chentao.library.span.Config
 import me.chentao.library.span.Spans
 import me.chentao.span.IMAGE_URL
@@ -63,6 +64,7 @@ class PlaceholderActivity : AppCompatActivity() {
         Config.ofImage()
           .url(IMAGE_URL)
           .width(80.dp)
+          .verticalAlign(VERTICAL_ALIGN_BASELINE)
       )
       .loader(GlideImageLoader())
       .inject(tvMsg)

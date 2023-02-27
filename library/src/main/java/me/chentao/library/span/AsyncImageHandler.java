@@ -12,7 +12,7 @@ import java.util.List;
  * <br>
  * create by chentao on 2023-02-26.
  */
-public final class AsyncImageSpanEngine {
+public final class AsyncImageHandler {
 
   private final List<String> urls = new LinkedList<>();
   private final List<IndexerProcessor.DynamicProxy> processors = new LinkedList<>();
