@@ -12,9 +12,9 @@ import me.chentao.library.span.image.AlignImageSpan;
 /**
  * Span 的配置。
  * <br>
- * 普通文字的配置：{@link Default}，通过 {@link Configs#ofDefault()} 完成。
+ * 普通文字的配置：{@link Text}，通过 {@link Configs#text()} 完成。
  * <br>
- * 图片的配置：{@link Image}，通过 {@link Configs#ofImage()} 完成。
+ * 图片的配置：{@link Image}，通过 {@link Configs#image()} 完成。
  * <br>
  * create by chentao on 2023-02-26.
  */
@@ -43,7 +43,7 @@ public interface Config {
   /**
    * 默认配置
    */
-  final class Default extends Click<Default> {
+  final class Text extends Click<Text> {
 
     @ColorInt
     private int color = NONE;
@@ -53,7 +53,7 @@ public interface Config {
 
     private boolean bold = false;
 
-    Default() {}
+    Text() {}
 
     int getColor() {
       return color;
@@ -67,17 +67,17 @@ public interface Config {
       return bold;
     }
 
-    public Default color(@ColorInt int color) {
+    public Text color(@ColorInt int color) {
       this.color = color;
       return this;
     }
 
-    public Default bold() {
+    public Text bold() {
       this.bold = true;
       return this;
     }
 
-    public Default size(@Px int size) {
+    public Text size(@Px int size) {
       this.size = size;
       return this;
     }

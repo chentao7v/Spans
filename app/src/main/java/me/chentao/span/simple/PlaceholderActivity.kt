@@ -43,27 +43,27 @@ class PlaceholderActivity : AppCompatActivity() {
 
     Spans.placeholder(msg)
       .with("188****8888",
-        Configs.ofDefault()
+        Configs.text()
           .color(colorRes(R.color.teal_200))
           .size(30.dp)
           .click {
             Log.i(TAG, "click A ~~~")
           })
       .with("199****9999",
-        Configs.ofDefault()
+        Configs.text()
           .color(colorRes(R.color.teal_700))
           .size(25.dp)
           .click {
             Log.i(TAG, "click B B !!!")
           })
       .withImage(
-        Configs.ofImage()
+        Configs.image()
           .drawable(drawableRes(R.drawable.mini_icon3))
           .verticalAlign(CENTER)
           .width(50.dp)
       )
       .withImage(
-        Configs.ofImage()
+        Configs.image()
           .url(IMAGE_URL)
           .verticalAlign(BOTTOM)
           .width(80.dp)

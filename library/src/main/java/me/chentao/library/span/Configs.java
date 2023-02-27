@@ -9,11 +9,11 @@ public final class Configs {
 
   private Configs() {}
 
-  public static Config.Default ofDefault() {
-    return new Config.Default();
+  public static Config.Text text() {
+    return new Config.Text();
   }
 
-  public static Config.Image ofImage() {
+  public static Config.Image image() {
     return new Config.Image();
   }
 

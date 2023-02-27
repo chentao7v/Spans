@@ -42,13 +42,13 @@ class PipelineActivity : AppCompatActivity() {
     val msg4 = "文本DDDDD"
 
     Spans.pipeline()
-      .add(msg1, Configs.ofDefault().color(colorRes(R.color.purple_200)).click {
+      .add(msg1, Configs.text().color(colorRes(R.color.purple_200)).click {
         Log.d(TAG, "click AAA")
       })
-      .add(msg2, Configs.ofDefault().color(colorRes(R.color.black)).size(20.dp).click { Log.d(TAG, "click BBB") })
-      .add(msg3, Configs.ofDefault().color(colorRes(R.color.teal_200)).bold())
-      .addImage(Configs.ofImage().drawable(drawableRes(R.drawable.mini_icon6)))
-      .add(msg4, Configs.ofDefault().color(colorRes(R.color.teal_700)))
+      .add(msg2, Configs.text().color(colorRes(R.color.black)).size(20.dp).click { Log.d(TAG, "click BBB") })
+      .add(msg3, Configs.text().color(colorRes(R.color.teal_200)).bold())
+      .addImage(Configs.image().drawable(drawableRes(R.drawable.mini_icon6)))
+      .add(msg4, Configs.text().color(colorRes(R.color.teal_700)))
       .inject(tvMsg)
   }
 

@@ -25,7 +25,7 @@ public final class IndexerFlow {
    *
    * @param config 具体的效果
    */
-  public IndexerFlow add(@IntRange(from = 0) int start, @IntRange(from = 0) int end, @NonNull Config.Default config) {
+  public IndexerFlow add(@IntRange(from = 0) int start, @IntRange(from = 0) int end, @NonNull Config.Text config) {
     if (start >= end) {
       throw new IllegalArgumentException("start(" + start + ") < end(" + end + ")");
     }

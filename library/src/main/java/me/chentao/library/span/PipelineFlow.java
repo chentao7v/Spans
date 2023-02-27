@@ -21,7 +21,7 @@ public final class PipelineFlow {
    *
    * @param config Span 对应配置
    */
-  public PipelineFlow add(@NonNull String source, @NonNull Config.Default config) {
+  public PipelineFlow add(@NonNull String source, @NonNull Config.Text config) {
     engine.add(source, config);
     return this;
   }

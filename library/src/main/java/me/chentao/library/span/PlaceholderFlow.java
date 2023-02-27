@@ -27,7 +27,7 @@ public final class PlaceholderFlow {
    * @param data 文本
    * @param config Span 配置
    */
-  public PlaceholderFlow with(@NonNull String data, @NonNull Config.Default config) {
+  public PlaceholderFlow with(@NonNull String data, @NonNull Config.Text config) {
     engine.replace(data, config);
     return this;
   }

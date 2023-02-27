@@ -33,9 +33,9 @@ public abstract class Engine {
   protected Processor parse(@NonNull Config config) {
     Processor.ComposeProcessor compose = new Processor.ComposeProcessor();
 
-    if (config instanceof Config.Default) {
+    if (config instanceof Config.Text) {
       // 处理常见操作
-      Config.Default c = (Config.Default) config;
+      Config.Text c = (Config.Text) config;
 
       if (c.getListener() != null) {
         this.clickable = true;

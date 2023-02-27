@@ -37,13 +37,13 @@ class IndexerActivity : AppCompatActivity() {
     val msg = "这是一段长文字，需要在第12到XXXX20处高亮，就撒快递费就开了撒金飞达拉卡萨激发的设计阿吉撒京东客服时间啊复健科洒基放大机洒基放大了刷卡机"
 
     Spans.indexer(msg)
-      .add(12, 21, Configs.ofDefault().color(colorRes(R.color.purple_700)))
-      .add(3, 21, Configs.ofDefault().bold())
-      .add(4, 21, Configs.ofDefault().size(18.dp))
-      .add(7, 30, Configs.ofDefault().click {
+      .add(12, 21, Configs.text().color(colorRes(R.color.purple_700)))
+      .add(3, 21, Configs.text().bold())
+      .add(4, 21, Configs.text().size(18.dp))
+      .add(7, 30, Configs.text().click {
         Toast.makeText(this, "哈哈哈哈", Toast.LENGTH_SHORT).show()
       })
-      .addImage(7, Configs.ofImage().drawable(drawableRes(R.drawable.mini_icon3)).width(50.dp))
+      .addImage(7, Configs.image().drawable(drawableRes(R.drawable.mini_icon3)).width(50.dp))
       .inject(tvMsg)
   }
 
