@@ -3,25 +3,31 @@ package me.chentao.library.span;
 import android.text.Spannable;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import me.chentao.library.span.image.AsyncImageEngine;
+import me.chentao.library.span.image.SpanImageLoader;
 
 /**
+ * Span 处理引擎
+ * <br>
  * create by chentao on 2023-02-27.
  */
 public abstract class Engine {
 
   @NonNull
-  protected final AsyncImageEngine asyncEngine;
+  protected final AsyncImageEngine asyncEngine = new AsyncImageEngine();
 
   private boolean clickable;
 
-  public Engine() {
-    this.asyncEngine = new AsyncImageEngine();
-  }
-
+  /**
+   * 设置异步图片加载器
+   */
   public void setImageLoader(@NonNull SpanImageLoader loader) {
     this.asyncEngine.setImageLoader(loader);
   }
 
+  /**
+   * 将 {@link Config} 解析为 {@link IndexerProcessor}。
+   */
   protected IndexerProcessor parse(@NonNull Config config) {
     IndexerProcessor.ComposeProcessor compose = new IndexerProcessor.ComposeProcessor();
 
@@ -59,7 +65,7 @@ public abstract class Engine {
       } else if (c.getDrawable() != null) {
         compose.addProcessor(new IndexerProcessor.Image(c.getDrawable(), c.getWidth(), c.getVerticalAlign()));
       } else if (c.getUrl() != null) {
-        IndexerProcessor.DynamicProxy proxy = new IndexerProcessor.DynamicProxy(c.getWidth(), c.getVerticalAlign());
+        IndexerProcessor.AsyncProxy proxy = new IndexerProcessor.AsyncProxy(c.getWidth(), c.getVerticalAlign());
         compose.addProcessor(proxy);
         asyncEngine.register(c.getUrl(), proxy);
       }
@@ -67,8 +73,16 @@ public abstract class Engine {
     return compose;
   }
 
+  /**
+   * 返回处理过的文本 {@link Spannable}。
+   */
+  public abstract Spannable execute();
+
+  /**
+   * 将 Span 注入到 TextView 中。
+   */
   public void inject(TextView textView) {
-    Spannable spannable = end();
+    Spannable spannable = execute();
     boolean async = asyncEngine.containsAsync();
     Spans.inject(textView, spannable, clickable, async);
     if (async) {
@@ -81,7 +95,5 @@ public abstract class Engine {
       });
     }
   }
-
-  public abstract Spannable end();
 
 }

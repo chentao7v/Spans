@@ -3,6 +3,7 @@ package me.chentao.library.span;
 import android.text.Spannable;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import me.chentao.library.span.image.SpanImageLoader;
 
 /**
  * 通过占位符的方式设置 Span。
@@ -20,28 +21,45 @@ public final class PlaceholderFlow {
     engine = new PlaceholderEngine(source);
   }
 
-  public PlaceholderFlow replace(@NonNull String data, @NonNull Config config) {
+  /**
+   * 使用 data 替换对应占位符，并给 data 设置 Span。
+   *
+   * @param data 文本
+   * @param config Span 配置
+   */
+  public PlaceholderFlow with(@NonNull String data, @NonNull Config config) {
     engine.replace(data, config);
     return this;
   }
 
-  public PlaceholderFlow replace(@NonNull Config image) {
+  /**
+   * 使用图片替换对应占位符，
+   *
+   * @param image 图片的配置
+   */
+  public PlaceholderFlow withImage(@NonNull Config image) {
     engine.replace(" ", image);
     return this;
   }
 
+  /**
+   * @see Engine#setImageLoader(SpanImageLoader)
+   */
   public PlaceholderFlow loader(@NonNull SpanImageLoader loader) {
     engine.setImageLoader(loader);
     return this;
   }
 
   /**
-   * 返回处理后的 Span
+   * @see Engine#execute()
    */
-  public Spannable end() {
-    return engine.end();
+  public Spannable execute() {
+    return engine.execute();
   }
 
+  /**
+   * @see Engine#inject(TextView)Ï
+   */
   public void inject(TextView textView) {
     engine.inject(textView);
   }

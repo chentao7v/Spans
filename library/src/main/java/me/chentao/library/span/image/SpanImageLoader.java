@@ -1,4 +1,4 @@
-package me.chentao.library.span;
+package me.chentao.library.span.image;
 
 import android.graphics.drawable.Drawable;
 import androidx.annotation.NonNull;

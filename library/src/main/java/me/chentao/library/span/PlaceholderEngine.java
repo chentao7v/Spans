@@ -3,9 +3,12 @@ package me.chentao.library.span;
 import android.text.Spannable;
 import android.text.SpannableString;
 import androidx.annotation.NonNull;
-import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
+ * 占位符引擎
+ * <br>
  * create by chentao on 2023-02-26.
  */
 public final class PlaceholderEngine extends Engine {
@@ -13,13 +16,12 @@ public final class PlaceholderEngine extends Engine {
   @NonNull
   private StringBuilder source;
 
-  private final ArrayDeque<IndexerProcessor.Element> elements;
+  private final List<IndexerProcessor.Element> elements;
 
   private int startIndex = 0;
 
   public PlaceholderEngine(@NonNull String source) {
-    super();
-    this.elements = new ArrayDeque<>();
+    this.elements = new ArrayList<>();
     this.source = new StringBuilder(source);
   }
 
@@ -42,9 +44,16 @@ public final class PlaceholderEngine extends Engine {
   }
 
   @Override
-  public Spannable end() {
+  public Spannable execute() {
     SpannableString spannable = new SpannableString(source);
-    IndexerProcessor.applyAll(spannable, elements);
+
+    for (IndexerProcessor.Element element : elements) {
+      IndexerProcessor processor = element.processor();
+      int start = element.start();
+      int end = element.end();
+      processor.apply(spannable, start, end);
+    }
+
     this.elements.clear();
     return spannable;
   }

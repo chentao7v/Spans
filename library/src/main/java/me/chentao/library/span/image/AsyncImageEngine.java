@@ -1,4 +1,4 @@
-package me.chentao.library.span;
+package me.chentao.library.span.image;
 
 import android.graphics.drawable.Drawable;
 import android.text.Spannable;
@@ -6,9 +6,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import java.util.LinkedList;
 import java.util.List;
+import me.chentao.library.span.IndexerProcessor;
 
 /**
- * 对异步图片的处理。
+ * 异步图片处理引擎。
  * <br>
  * create by chentao on 2023-02-26.
  */
@@ -17,12 +18,12 @@ public final class AsyncImageEngine {
   @NonNull
   private final List<String> urls = new LinkedList<>();
   @NonNull
-  private final List<IndexerProcessor.DynamicProxy> processors = new LinkedList<>();
+  private final List<IndexerProcessor.AsyncProxy> processors = new LinkedList<>();
 
   @Nullable
   private SpanImageLoader loader;
 
-  public void register(@NonNull String url, @NonNull IndexerProcessor.DynamicProxy processor) {
+  public void register(@NonNull String url, @NonNull IndexerProcessor.AsyncProxy processor) {
     urls.add(url);
     processors.add(processor);
   }
@@ -40,7 +41,7 @@ public final class AsyncImageEngine {
 
     for (int i = 0; i < size; i++) {
       String url = urls.get(i);
-      IndexerProcessor.DynamicProxy proxy = processors.get(i);
+      IndexerProcessor.AsyncProxy proxy = processors.get(i);
 
       if (loader == null) {
         throw new NullPointerException("call #load(SpanImageLoader) first !! ");
@@ -60,7 +61,10 @@ public final class AsyncImageEngine {
     }
   }
 
-  private void update(@NonNull Spannable spannable, @Nullable Drawable resource, IndexerProcessor.DynamicProxy proxy, @NonNull Listener listener) {
+  /**
+   * 图片下载完成后，再使用 ImageSpan 去更新 TextView
+   */
+  private void update(@NonNull Spannable spannable, @Nullable Drawable resource, IndexerProcessor.AsyncProxy proxy, @NonNull Listener listener) {
     if (resource != null) {
       IndexerProcessor.Image image = new IndexerProcessor.Image(
         resource,
@@ -71,13 +75,15 @@ public final class AsyncImageEngine {
 
     // 标识处理完成
     listener.onComplete();
-
   }
 
   public void setImageLoader(SpanImageLoader loader) {
     this.loader = loader;
   }
 
+  /**
+   * 是否包含异步图片
+   */
   public boolean containsAsync() {
     return !urls.isEmpty();
   }

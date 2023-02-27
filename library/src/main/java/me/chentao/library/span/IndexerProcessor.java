@@ -16,25 +16,34 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.Px;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
+import me.chentao.library.span.image.AlignImageSpan;
 
 /**
- * 索引 Span 接口
+ * Span 处理器。
  * <br>
  * create by chentao on 2023-02-23.
  */
 public interface IndexerProcessor {
 
+  /**
+   * 处理效果处理器。可完成对一组效果的处理。
+   */
   final class ComposeProcessor implements IndexerProcessor {
 
     @NonNull
     private final List<IndexerProcessor> processors = new ArrayList<>();
 
+    /**
+     * 添加一个处理器。
+     */
     public void addProcessor(@NonNull IndexerProcessor processor) {
       this.processors.add(processor);
     }
 
+    /**
+     * 完成所有效果的处理
+     */
     @Override
     public void apply(Spannable spannable, int start, int end) {
       for (IndexerProcessor processor : this.processors) {
@@ -43,6 +52,9 @@ public interface IndexerProcessor {
     }
   }
 
+  /**
+   * 颜色处理器
+   */
   final class Color implements IndexerProcessor {
     @ColorInt
     private final int color;
@@ -57,6 +69,9 @@ public interface IndexerProcessor {
     }
   }
 
+  /**
+   * 点击事件处理器
+   */
   final class Click implements IndexerProcessor {
 
     @ColorInt
@@ -90,6 +105,9 @@ public interface IndexerProcessor {
     }
   }
 
+  /**
+   * 加粗处理器
+   */
   final class Bold implements IndexerProcessor {
 
     @Override
@@ -98,6 +116,9 @@ public interface IndexerProcessor {
     }
   }
 
+  /**
+   * 文字大小处理器
+   */
   final class Size implements IndexerProcessor {
 
     private final int size;
@@ -113,7 +134,7 @@ public interface IndexerProcessor {
   }
 
   /**
-   * 本地图片
+   * 本地图片处理器
    */
   class Image implements IndexerProcessor {
 
@@ -139,7 +160,10 @@ public interface IndexerProcessor {
     }
   }
 
-  class DynamicProxy implements IndexerProcessor {
+  /**
+   * 异步代理处理器。用来处理异步下载图片的场景。
+   */
+  class AsyncProxy implements IndexerProcessor {
 
     private int start;
     private int end;
@@ -150,7 +174,7 @@ public interface IndexerProcessor {
     @AlignImageSpan.VerticalAlign
     private final int verticalAlign;
 
-    public DynamicProxy(@Px int size, @AlignImageSpan.VerticalAlign int verticalAlign) {
+    public AsyncProxy(@Px int size, @AlignImageSpan.VerticalAlign int verticalAlign) {
       this.size = size;
       this.verticalAlign = verticalAlign;
     }
@@ -161,6 +185,9 @@ public interface IndexerProcessor {
       this.end = end;
     }
 
+    /**
+     * 图片下载完成后，再更新 Span。
+     */
     public void update(@NonNull Spannable spannable, @NonNull IndexerProcessor processor) {
       processor.apply(spannable, start, end);
     }
@@ -176,7 +203,7 @@ public interface IndexerProcessor {
   }
 
   /**
-   * 封装一段文本的各个 Span。
+   * 处理器元素
    */
   class Element {
     private final int start;
@@ -189,15 +216,15 @@ public interface IndexerProcessor {
       this.length = length;
     }
 
-    public int getStart() {
+    public int start() {
       return start;
     }
 
-    public int getEnd() {
+    public int end() {
       return start + length;
     }
 
-    public int getLength() {
+    public int length() {
       return length;
     }
 
@@ -211,17 +238,4 @@ public interface IndexerProcessor {
    */
   void apply(Spannable spannable, int start, int end);
 
-  /**
-   * 给对应 {@link Spannable} 实现所有的 Span 效果
-   *
-   * @param elements Span 效果
-   */
-  static void applyAll(Spannable spannable, Collection<Element> elements) {
-    for (Element element : elements) {
-      IndexerProcessor indexer = element.processor();
-      int start = element.getStart();
-      int end = element.getEnd();
-      indexer.apply(spannable, start, end);
-    }
-  }
 }

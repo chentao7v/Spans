@@ -1,4 +1,4 @@
-package me.chentao.library.span;
+package me.chentao.library.span.image;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -17,9 +17,9 @@ import java.lang.ref.WeakReference;
 /**
  * 支持自动对齐的 {@link ImageSpan}。
  * 对齐方式有一下三种：
- * <br>{@link #VERTICAL_ALIGN_BASELINE} 图片和文字的 baseline 对齐，对齐时也模拟了图片的 baseline；
- * <br>{@link #VERTICAL_ALIGN_BOTTOM} 图片的底部和文字的底部对齐
- * <br>{@link #VERTICAL_ALIGN_BOTTOM} 图片的文字居中对齐
+ * <br>{@link #BASELINE} 图片和文字的 baseline 对齐，对齐时也模拟了图片的 baseline；
+ * <br>{@link #BOTTOM} 图片的底部和文字的底部对齐
+ * <br>{@link #BOTTOM} 图片的文字居中对齐
  * <br>
  * create by chentao on 2023-02-24.
  */
@@ -27,11 +27,11 @@ public class AlignImageSpan extends ImageSpan {
 
   private static final String TAG = "AlignImageSpan";
 
-  public static final int VERTICAL_ALIGN_BOTTOM = 0;
-  public static final int VERTICAL_ALIGN_BASELINE = 1;
-  public static final int VERTICAL_ALIGN_CENTER = 2;
+  public static final int BOTTOM = 0;
+  public static final int BASELINE = 1;
+  public static final int CENTER = 2;
 
-  @IntDef({ VERTICAL_ALIGN_BOTTOM, VERTICAL_ALIGN_BASELINE, VERTICAL_ALIGN_CENTER })
+  @IntDef({ BOTTOM, BASELINE, CENTER })
   @Retention(RetentionPolicy.SOURCE)
   public @interface VerticalAlign {}
 
@@ -50,6 +50,9 @@ public class AlignImageSpan extends ImageSpan {
     this.verticalAlign = verticalAlign;
   }
 
+  /**
+   * 设置原始的宽高
+   */
   public void setBounds() {
     Drawable b = getCachedDrawable();
     if (b == null) {
@@ -61,6 +64,9 @@ public class AlignImageSpan extends ImageSpan {
     setBounds(b, width, height);
   }
 
+  /**
+   * 所指缩放的宽高。高度将自动完成比例缩放
+   */
   public void setScaleBounds(int realWidth) {
     Drawable b = getCachedDrawable();
     if (b == null) {
@@ -97,10 +103,10 @@ public class AlignImageSpan extends ImageSpan {
 
       int centerY = fontMetrics.top + fontHeight / 2;
 
-      if (verticalAlign == VERTICAL_ALIGN_CENTER) {
+      if (verticalAlign == CENTER) {
         fm.ascent = centerY - drawableHeight / 2;
         fm.descent = centerY + drawableHeight / 2;
-      } else if (verticalAlign == VERTICAL_ALIGN_BASELINE) {
+      } else if (verticalAlign == BASELINE) {
         float topPercent = Math.abs(fontMetrics.top) / (fontHeight * 1.f);
         fm.ascent = (int) (drawableHeight * topPercent * -1);
         fm.descent = (int) (drawableHeight * (1 - topPercent));

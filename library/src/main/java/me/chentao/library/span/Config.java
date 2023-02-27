@@ -7,6 +7,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.Px;
+import me.chentao.library.span.image.AlignImageSpan;
 
 /**
  * Span 的配置。
@@ -29,6 +30,9 @@ public interface Config {
     return new Image();
   }
 
+  /**
+   * 点击事件。
+   */
   class Click implements Config {
     @Nullable
     private View.OnClickListener listener;
@@ -106,7 +110,7 @@ public interface Config {
     private String url;
 
     @AlignImageSpan.VerticalAlign
-    private int verticalAlign = AlignImageSpan.VERTICAL_ALIGN_CENTER;
+    private int verticalAlign = AlignImageSpan.CENTER;
 
     private Image() {}
 

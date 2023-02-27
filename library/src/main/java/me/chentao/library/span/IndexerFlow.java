@@ -20,6 +20,11 @@ public final class IndexerFlow {
     this.engine = new IndexerEngine(source);
   }
 
+  /**
+   * 给对应子串 [start,end) 添加 Span。
+   *
+   * @param config 具体的效果
+   */
   public IndexerFlow add(@IntRange(from = 0) int start, @IntRange(from = 0) int end, @NonNull Config config) {
     if (start >= end) {
       throw new IllegalArgumentException("start(" + start + ") < end(" + end + ")");
@@ -29,10 +34,16 @@ public final class IndexerFlow {
     return this;
   }
 
-  public Spannable end() {
-    return engine.end();
+  /**
+   * @see Engine#execute()
+   */
+  public Spannable execute() {
+    return engine.execute();
   }
 
+  /**
+   * @see Engine#inject(TextView)
+   */
   public void inject(@NonNull TextView textView) {
     engine.inject(textView);
   }
