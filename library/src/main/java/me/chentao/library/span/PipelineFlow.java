@@ -19,20 +19,20 @@ import java.util.Queue;
  * <br>
  * create by chentao on 2023-02-23.
  */
-public final class SpliceSpanFlow {
+public final class PipelineFlow {
 
   private final Deque<Spannable> spans;
 
   private boolean clickable;
 
-  SpliceSpanFlow() {
+  PipelineFlow() {
     spans = new ArrayDeque<>();
   }
 
   /**
    * 给指定的 {@link CharSequence} 添加点击事件和颜色
    */
-  public SpliceSpanFlow click(CharSequence source, @ColorInt int color, @Nullable View.OnClickListener listener) {
+  public PipelineFlow click(CharSequence source, @ColorInt int color, @Nullable View.OnClickListener listener) {
     this.clickable = true;
     spans.add(new PipelineProcessor.Click(color, listener).apply(source));
     return this;
@@ -41,14 +41,14 @@ public final class SpliceSpanFlow {
   /**
    * 给指定的 {@link CharSequence} 添加点击事件
    */
-  public SpliceSpanFlow click(CharSequence source, @Nullable View.OnClickListener listener) {
+  public PipelineFlow click(CharSequence source, @Nullable View.OnClickListener listener) {
     return click(source, -1, listener);
   }
 
   /**
    * 给最近一个 Span 添加点击事件和颜色
    */
-  public SpliceSpanFlow click(@ColorInt int color, @Nullable View.OnClickListener listener) {
+  public PipelineFlow click(@ColorInt int color, @Nullable View.OnClickListener listener) {
     this.clickable = true;
     applySpanForLast(new PipelineProcessor.OverlayClick(color, listener));
     return this;
@@ -57,14 +57,14 @@ public final class SpliceSpanFlow {
   /**
    * 给最近一个 Span 添加点击事件
    */
-  public SpliceSpanFlow click(@Nullable View.OnClickListener listener) {
+  public PipelineFlow click(@Nullable View.OnClickListener listener) {
     return click(-1, listener);
   }
 
   /**
    * 给指定的 {@link CharSequence} 添加设置颜色
    */
-  public SpliceSpanFlow color(CharSequence source, @ColorInt int color) {
+  public PipelineFlow color(CharSequence source, @ColorInt int color) {
     spans.add(new PipelineProcessor.Color(color).apply(source));
     return this;
   }
@@ -72,7 +72,7 @@ public final class SpliceSpanFlow {
   /**
    * 对最近的一个 Span 进行加粗
    */
-  public SpliceSpanFlow bold() {
+  public PipelineFlow bold() {
     applySpanForLast(new PipelineProcessor.Bold());
     return this;
   }
@@ -80,7 +80,7 @@ public final class SpliceSpanFlow {
   /**
    * 最近一个 Span 设置指定大小
    */
-  public SpliceSpanFlow size(@Px int size) {
+  public PipelineFlow size(@Px int size) {
     applySpanForLast(new PipelineProcessor.Size(size));
     return this;
   }
@@ -93,7 +93,7 @@ public final class SpliceSpanFlow {
     pipeline.apply(last);
   }
 
-  public SpliceSpanFlow clickable() {
+  public PipelineFlow clickable() {
     this.clickable = true;
     return this;
   }
@@ -115,9 +115,9 @@ public final class SpliceSpanFlow {
   }
 
   /**
-   * 转换为 {@link IndexerSpanFlow}
+   * 转换为 {@link IndexerFlow}
    */
-  public IndexerSpanFlow toIndex() {
+  public IndexerFlow toIndex() {
     Spannable spannable = end();
     return Spans.indexer(spannable);
   }

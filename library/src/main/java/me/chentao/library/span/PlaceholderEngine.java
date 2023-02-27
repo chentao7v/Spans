@@ -32,12 +32,12 @@ public final class PlaceholderEngine extends Engine {
    * 处理头部的占位符
    */
   private void handleHeadPlaceHolder(@NonNull String data, @NonNull IndexerProcessor processor) {
-    int index = source.indexOf(PlaceholderSpanFlow.HOLDER, startIndex);
+    int index = source.indexOf(PlaceholderFlow.HOLDER, startIndex);
     if (index == -1) {
       return;
     }
     startIndex = index;
-    source = source.replace(index, index + PlaceholderSpanFlow.HOLDER.length(), data);
+    source = source.replace(index, index + PlaceholderFlow.HOLDER.length(), data);
     elements.add(new IndexerProcessor.Element(processor, index, data.length()));
   }
 

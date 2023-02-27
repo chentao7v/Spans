@@ -12,15 +12,15 @@ import androidx.annotation.NonNull;
  * <br>
  * create by chentao on 2023-02-23.
  */
-public final class IndexerSpanFlow {
+public final class IndexerFlow {
 
   private final IndexerEngine engine;
 
-  IndexerSpanFlow(@NonNull CharSequence source) {
+  IndexerFlow(@NonNull CharSequence source) {
     this.engine = new IndexerEngine(source);
   }
 
-  public IndexerSpanFlow add(@IntRange(from = 0) int start, @IntRange(from = 0) int end, @NonNull Config config) {
+  public IndexerFlow add(@IntRange(from = 0) int start, @IntRange(from = 0) int end, @NonNull Config config) {
     if (start >= end) {
       throw new IllegalArgumentException("start(" + start + ") < end(" + end + ")");
     }

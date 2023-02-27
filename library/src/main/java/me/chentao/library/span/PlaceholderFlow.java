@@ -9,28 +9,28 @@ import androidx.annotation.NonNull;
  * <br>
  * create by chentao on 2023-02-23.
  */
-public final class PlaceholderSpanFlow {
+public final class PlaceholderFlow {
 
   public static final String HOLDER = "{$}";
 
   @NonNull
   private final PlaceholderEngine engine;
 
-  PlaceholderSpanFlow(@NonNull String source) {
+  PlaceholderFlow(@NonNull String source) {
     engine = new PlaceholderEngine(source);
   }
 
-  public PlaceholderSpanFlow replace(@NonNull String data, @NonNull Config config) {
+  public PlaceholderFlow replace(@NonNull String data, @NonNull Config config) {
     engine.replace(data, config);
     return this;
   }
 
-  public PlaceholderSpanFlow replace(@NonNull Config image) {
+  public PlaceholderFlow replace(@NonNull Config image) {
     engine.replace(" ", image);
     return this;
   }
 
-  public PlaceholderSpanFlow loader(@NonNull SpanImageLoader loader) {
+  public PlaceholderFlow loader(@NonNull SpanImageLoader loader) {
     engine.setImageLoader(loader);
     return this;
   }
