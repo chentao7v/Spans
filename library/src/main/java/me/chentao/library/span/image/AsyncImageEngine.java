@@ -68,8 +68,8 @@ public final class AsyncImageEngine {
     if (resource != null) {
       Processor.Image image = new Processor.Image(
         resource,
-        proxy.getSize(),
-        proxy.getVerticalAlign());
+        proxy.size(),
+        proxy.verticalAlign());
       proxy.update(spannable, image);
     }
 

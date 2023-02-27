@@ -197,11 +197,11 @@ public interface Processor {
     }
 
     @Px
-    public int getSize() {
+    public int size() {
       return size;
     }
 
-    public int getVerticalAlign() {
+    public int verticalAlign() {
       return verticalAlign;
     }
   }
