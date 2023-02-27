@@ -2,6 +2,7 @@ package me.chentao.library.span;
 
 import android.text.Spannable;
 import android.widget.TextView;
+import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
 
 /**
@@ -19,7 +20,11 @@ public final class IndexerSpanFlow {
     this.engine = new IndexerEngine(source);
   }
 
-  public IndexerSpanFlow add(int start, int end, @NonNull Config config) {
+  public IndexerSpanFlow add(@IntRange(from = 0) int start, @IntRange(from = 0) int end, @NonNull Config config) {
+    if (start >= end) {
+      throw new IllegalArgumentException("start(" + start + ") < end(" + end + ")");
+    }
+
     engine.add(start, end, config);
     return this;
   }

@@ -147,8 +147,12 @@ public interface IndexerProcessor {
     @Px
     private final int size;
 
-    public DynamicProxy(@Px int size) {
+    @AlignImageSpan.VerticalAlign
+    private final int verticalAlign;
+
+    public DynamicProxy(@Px int size, @AlignImageSpan.VerticalAlign int verticalAlign) {
       this.size = size;
+      this.verticalAlign = verticalAlign;
     }
 
     @Override
@@ -164,6 +168,10 @@ public interface IndexerProcessor {
     @Px
     public int getSize() {
       return size;
+    }
+
+    public int getVerticalAlign() {
+      return verticalAlign;
     }
   }
 

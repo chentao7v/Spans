@@ -59,7 +59,7 @@ public abstract class Engine {
       } else if (c.getDrawable() != null) {
         compose.addProcessor(new IndexerProcessor.Image(c.getDrawable(), c.getWidth(), c.getVerticalAlign()));
       } else if (c.getUrl() != null) {
-        IndexerProcessor.DynamicProxy proxy = new IndexerProcessor.DynamicProxy(c.getWidth());
+        IndexerProcessor.DynamicProxy proxy = new IndexerProcessor.DynamicProxy(c.getWidth(), c.getVerticalAlign());
         compose.addProcessor(proxy);
         asyncHandler.register(c.getUrl(), proxy);
       }

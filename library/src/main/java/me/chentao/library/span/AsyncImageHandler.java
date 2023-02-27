@@ -63,7 +63,7 @@ public final class AsyncImageHandler {
       IndexerProcessor.Image image = new IndexerProcessor.Image(
         resource,
         proxy.getSize(),
-        AlignImageSpan.VERTICAL_ALIGN_CENTER);
+        proxy.getVerticalAlign());
       proxy.update(spannable, image);
     }
 

@@ -38,9 +38,9 @@ class IndexerActivity : AppCompatActivity() {
 
     Spans.indexer(msg)
       .add(12, 21, Config.ofDefault().color(colorRes(R.color.purple_700)))
-      .add(12, 21, Config.ofDefault().bold())
-      .add(12, 21, Config.ofDefault().size(18.dp))
-      .add(12, 30, Config.ofDefault().click {
+      .add(3, 21, Config.ofDefault().bold())
+      .add(4, 21, Config.ofDefault().size(18.dp))
+      .add(7, 30, Config.ofDefault().click {
         Toast.makeText(this, "哈哈哈哈", Toast.LENGTH_SHORT).show()
       })
       .inject(tvMsg)
