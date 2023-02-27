@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import me.chentao.library.span.image.AlignImageSpan.BOTTOM
 import me.chentao.library.span.image.AlignImageSpan.CENTER
-import me.chentao.library.span.Config
 import me.chentao.library.span.Configs
 import me.chentao.library.span.Spans
 import me.chentao.span.IMAGE_URL

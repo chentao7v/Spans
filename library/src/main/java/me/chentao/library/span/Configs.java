@@ -1,6 +1,8 @@
 package me.chentao.library.span;
 
 /**
+ * Config 配置工具
+ * <br>
  * create by chentao on 2023-02-27.
  */
 public final class Configs {

@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import me.chentao.library.span.Config
 import me.chentao.library.span.Configs
 import me.chentao.library.span.Spans
 import me.chentao.span.R

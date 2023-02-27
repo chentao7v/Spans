@@ -5,6 +5,8 @@ import android.text.SpannableString;
 import java.util.Collection;
 
 /**
+ * Processor 工具
+ * <br>
  * create by chentao on 2023-02-27.
  */
 public final class Processors {

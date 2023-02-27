@@ -12,9 +12,9 @@ import me.chentao.library.span.image.AlignImageSpan;
 /**
  * Span 的配置。
  * <br>
- * 普通文字的配置：{@link Default}，通过 {@link Config#ofDefault()} 完成。
+ * 普通文字的配置：{@link Default}，通过 {@link Configs#ofDefault()} 完成。
  * <br>
- * 图片的配置：{@link Image}，通过 {@link Config#ofImage()} 完成。
+ * 图片的配置：{@link Image}，通过 {@link Configs#ofImage()} 完成。
  * <br>
  * create by chentao on 2023-02-26.
  */
