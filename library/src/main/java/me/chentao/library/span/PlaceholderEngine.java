@@ -26,13 +26,13 @@ public final class PlaceholderEngine extends Engine {
 
   public void replace(@NonNull String data, @NonNull Config config) {
     Processor processor = parse(config);
-    handleHeadPlaceHolder(data, processor);
+    handle(data, processor);
   }
 
   /**
    * 处理头部的占位符
    */
-  private void handleHeadPlaceHolder(@NonNull String data, @NonNull Processor processor) {
+  private void handle(@NonNull String data, @NonNull Processor processor) {
     int index = source.indexOf(PlaceholderFlow.HOLDER, startIndex);
     if (index == -1) {
       return;
