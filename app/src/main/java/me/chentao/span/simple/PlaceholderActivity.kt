@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import me.chentao.library.span.image.AlignImageSpan.BOTTOM
 import me.chentao.library.span.image.AlignImageSpan.CENTER
 import me.chentao.library.span.Config
+import me.chentao.library.span.Configs
 import me.chentao.library.span.Spans
 import me.chentao.span.IMAGE_URL
 import me.chentao.span.R
@@ -43,27 +44,27 @@ class PlaceholderActivity : AppCompatActivity() {
 
     Spans.placeholder(msg)
       .with("188****8888",
-        Config.ofDefault()
+        Configs.ofDefault()
           .color(colorRes(R.color.teal_200))
           .size(30.dp)
           .click {
             Log.i(TAG, "click A ~~~")
           })
       .with("199****9999",
-        Config.ofDefault()
+        Configs.ofDefault()
           .color(colorRes(R.color.teal_700))
           .size(25.dp)
           .click {
             Log.i(TAG, "click B B !!!")
           })
       .withImage(
-        Config.ofImage()
+        Configs.ofImage()
           .drawable(drawableRes(R.drawable.mini_icon3))
           .verticalAlign(CENTER)
           .width(50.dp)
       )
       .withImage(
-        Config.ofImage()
+        Configs.ofImage()
           .url(IMAGE_URL)
           .verticalAlign(BOTTOM)
           .width(80.dp)

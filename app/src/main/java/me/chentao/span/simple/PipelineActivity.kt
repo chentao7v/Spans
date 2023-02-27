@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import me.chentao.library.span.Config
+import me.chentao.library.span.Configs
 import me.chentao.library.span.Spans
 import me.chentao.span.R
 
@@ -42,13 +42,13 @@ class PipelineActivity : AppCompatActivity() {
     val msg4 = "文本DDDDD"
 
     Spans.pipeline()
-      .add(msg1, Config.ofDefault().color(colorRes(R.color.purple_200)).click {
+      .add(msg1, Configs.ofDefault().color(colorRes(R.color.purple_200)).click {
         Log.d(TAG, "click AAA")
       })
-      .add(msg2, Config.ofDefault().color(colorRes(R.color.black)).size(20.dp).click { Log.d(TAG, "click BBB") })
-      .add(msg3, Config.ofDefault().color(colorRes(R.color.teal_200)).bold())
-      .addImage(Config.ofImage().drawable(drawableRes(R.drawable.mini_icon6)))
-      .add(msg4, Config.ofDefault().color(colorRes(R.color.teal_700)))
+      .add(msg2, Configs.ofDefault().color(colorRes(R.color.black)).size(20.dp).click { Log.d(TAG, "click BBB") })
+      .add(msg3, Configs.ofDefault().color(colorRes(R.color.teal_200)).bold())
+      .addImage(Configs.ofImage().drawable(drawableRes(R.drawable.mini_icon6)))
+      .add(msg4, Configs.ofDefault().color(colorRes(R.color.teal_700)))
       .inject(tvMsg)
   }
 

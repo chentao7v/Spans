@@ -22,14 +22,6 @@ public interface Config {
 
   int NONE = -1;
 
-  static Default ofDefault() {
-    return new Default();
-  }
-
-  static Image ofImage() {
-    return new Image();
-  }
-
   /**
    * 点击事件
    */
@@ -61,7 +53,7 @@ public interface Config {
 
     private boolean bold = false;
 
-    private Default() {}
+    Default() {}
 
     int getColor() {
       return color;
@@ -112,7 +104,7 @@ public interface Config {
     @AlignImageSpan.VerticalAlign
     private int verticalAlign = AlignImageSpan.CENTER;
 
-    private Image() {}
+    Image() {}
 
     public Image width(@Px int width) {
       this.width = width;
