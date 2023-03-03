@@ -31,7 +31,7 @@ public abstract class Engine {
    * 将 {@link Config} 解析为 {@link Processor}。
    */
   protected Processor parse(@NonNull Config config) {
-    Processor.ComposeProcessor compose = new Processor.ComposeProcessor();
+    Processor.Compose compose = new Processor.Compose();
 
     if (config instanceof Config.Text) {
       // 处理常见操作

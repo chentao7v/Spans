@@ -32,7 +32,7 @@ public interface Processor {
   /**
    * 处理效果处理器。可完成对一组效果的处理。
    */
-  final class ComposeProcessor implements Processor {
+  final class Compose implements Processor {
 
     @NonNull
     private final List<Processor> processors = new ArrayList<>();
