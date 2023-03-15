@@ -51,6 +51,14 @@ class GlideImageLoader : SpanImageLoader {
 
 
 
+## 使用方法
+
+在 `build.gradle`  中添加：
+
+```groovy
+implementation 'io.github.chentao7v:spans:1.0.2'
+```
+
 
 
 ## 支持的富文本配置
