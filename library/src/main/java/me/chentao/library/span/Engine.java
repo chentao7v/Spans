@@ -83,6 +83,8 @@ public abstract class Engine {
         compose.addProcessor(proxy);
         asyncEngine.register(c.getUrl(), proxy);
       }
+    } else {
+      throw new IllegalArgumentException("unsupported config : " + config.getClass());
     }
     return compose;
   }
