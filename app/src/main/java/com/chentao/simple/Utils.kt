@@ -1,7 +1,6 @@
-package me.chentao.span.simple
+package com.chentao.simple
 
 import android.graphics.drawable.Drawable
-import me.chentao.span.appContext
 
 
 val Number.dp: Int

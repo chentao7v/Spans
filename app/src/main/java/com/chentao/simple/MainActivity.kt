@@ -1,4 +1,4 @@
-package me.chentao.span
+package com.chentao.simple
 
 import android.content.Context
 import android.os.Bundle
@@ -6,9 +6,7 @@ import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import me.chentao.span.simple.IndexerActivity
-import me.chentao.span.simple.PipelineActivity
-import me.chentao.span.simple.PlaceholderActivity
+import me.chentao.simple.R
 
 lateinit var appContext: Context
 

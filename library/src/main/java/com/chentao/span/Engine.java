@@ -1,12 +1,12 @@
-package me.chentao.library.span;
+package com.chentao.span;
 
 import android.graphics.Color;
 import android.text.Spannable;
 import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
-import me.chentao.library.span.image.AsyncImageEngine;
-import me.chentao.library.span.image.SpanImageLoader;
+import com.chentao.span.image.AsyncImageEngine;
+import com.chentao.span.image.SpanImageLoader;
 
 /**
  * Span 处理引擎

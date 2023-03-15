@@ -1,4 +1,4 @@
-package me.chentao.span.simple
+package com.chentao.simple
 
 import android.content.Context
 import android.content.Intent
@@ -6,9 +6,9 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import me.chentao.library.span.Configs
-import me.chentao.library.span.Spans
-import me.chentao.span.R
+import com.chentao.span.Configs
+import com.chentao.span.Spans
+import me.chentao.simple.R
 
 /**
  * create by chentao on 2023-02-23.

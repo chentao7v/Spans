@@ -1,4 +1,4 @@
-package me.chentao.library.span;
+package com.chentao.span;
 
 /**
  * 对 Span 进行处理的工具。

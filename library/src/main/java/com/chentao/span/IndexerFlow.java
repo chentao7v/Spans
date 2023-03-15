@@ -1,10 +1,10 @@
-package me.chentao.library.span;
+package com.chentao.span;
 
 import android.text.Spannable;
 import android.widget.TextView;
 import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
-import me.chentao.library.span.image.SpanImageLoader;
+import com.chentao.span.image.SpanImageLoader;
 
 /**
  * 通过索引的方式设置 Span

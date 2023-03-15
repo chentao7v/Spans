@@ -5,16 +5,16 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:theme="@style/Theme.Spans"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Spans"
         tools:targetApi="31">
         <activity
-            android:name="me.chentao.span.MainActivity"
+            android:name="com.chentao.simple.MainActivity"
             android:exported="true">
 
             <intent-filter>
@@ -24,9 +24,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".simple.PlaceholderActivity" />
-        <activity android:name=".simple.IndexerActivity" />
-        <activity android:name=".simple.PipelineActivity" />
+        <activity android:name="com.chentao.simple.PlaceholderActivity" />
+        <activity android:name="com.chentao.simple.IndexerActivity" />
+        <activity android:name="com.chentao.simple.PipelineActivity" />
     </application>
 
 </manifest>

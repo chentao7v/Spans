@@ -1,4 +1,4 @@
-package me.chentao.library.span.image;
+package com.chentao.span.image;
 
 import android.graphics.drawable.Drawable;
 import android.text.Spannable;
@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import java.util.LinkedList;
 import java.util.List;
-import me.chentao.library.span.Processor;
+import com.chentao.span.Processor;
 
 /**
  * 异步图片处理引擎。

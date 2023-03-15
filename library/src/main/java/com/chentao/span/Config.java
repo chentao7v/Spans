@@ -1,4 +1,4 @@
-package me.chentao.library.span;
+package com.chentao.span;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -7,7 +7,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.Px;
-import me.chentao.library.span.image.AlignImageSpan;
+import com.chentao.span.image.AlignImageSpan;
 
 /**
  * Span 的配置。

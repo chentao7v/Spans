@@ -1,4 +1,4 @@
-package me.chentao.library.span;
+package com.chentao.span;
 
 import android.text.Spannable;
 import androidx.annotation.NonNull;
