@@ -1,4 +1,4 @@
-package com.chentao.span;
+package io.github.chentao7v.span;
 
 /**
  * 对 Span 进行处理的工具。

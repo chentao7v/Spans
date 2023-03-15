@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.chentao.span.Configs
-import com.chentao.span.Spans
+import io.github.chentao7v.span.Configs
+import io.github.chentao7v.span.Spans
 import me.chentao.simple.R
 
 /**

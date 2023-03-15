@@ -6,10 +6,10 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.chentao.span.Configs
-import com.chentao.span.Spans
-import com.chentao.span.image.AlignImageSpan.BOTTOM
-import com.chentao.span.image.AlignImageSpan.CENTER
+import io.github.chentao7v.span.Configs
+import io.github.chentao7v.span.Spans
+import io.github.chentao7v.span.image.AlignImageSpan.BOTTOM
+import io.github.chentao7v.span.image.AlignImageSpan.CENTER
 import me.chentao.simple.R
 
 /**

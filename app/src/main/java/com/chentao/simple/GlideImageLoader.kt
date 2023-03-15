@@ -4,7 +4,7 @@ import android.graphics.drawable.Drawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
-import com.chentao.span.image.SpanImageLoader
+import io.github.chentao7v.span.image.SpanImageLoader
 import me.chentao.simple.R
 
 /**

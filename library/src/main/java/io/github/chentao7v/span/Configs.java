@@ -1,4 +1,4 @@
-package com.chentao.span;
+package io.github.chentao7v.span;
 
 /**
  * Config 配置工具

@@ -1,4 +1,4 @@
-package com.chentao.span;
+package io.github.chentao7v.span;
 
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
@@ -18,9 +18,9 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.Px;
+import io.github.chentao7v.span.image.AlignImageSpan;
 import java.util.ArrayList;
 import java.util.List;
-import com.chentao.span.image.AlignImageSpan;
 
 /**
  * Span 处理器。

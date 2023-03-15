@@ -1,4 +1,4 @@
-package com.chentao.span.image;
+package io.github.chentao7v.span.image;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
