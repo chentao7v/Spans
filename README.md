@@ -81,7 +81,7 @@ Spans.placeholder(msg)
 
 最终效果如下：
 
-<img src="./images/img1.jpg" style="zoom:25%;" />
+<img src="./images/img1.jpg" width="50%;" />
 
 
 
@@ -91,7 +91,7 @@ Spans.placeholder(msg)
 
 效果：
 
-<img src="./images/img2.jpg" style="zoom:25%;" />
+<img src="./images/img2.jpg" width="50%;" />
 
 源代码：
 
@@ -122,7 +122,7 @@ Spans.indexer(msg)
 
 最终呈现效果如下：
 
-<img src="./images/img3.jpg" style="zoom:25%;" />
+<img src="./images/img3.jpg" width="50%;" />
 
 源代码：
 
