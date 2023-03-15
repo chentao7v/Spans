@@ -22,21 +22,21 @@ implementation 'io.github.chentao7v:spans:1.0.2'
 
 ```kotlin
 Configs.text()
-	.color(color) // 颜色
-	.size(textSize) // 大小
-	.click { clickEvent... } // 点击事件
-	.bold() // 加粗
+  .color(color) // 颜色
+  .size(textSize) // 大小
+  .click { clickEvent... } // 点击事件
+  .bold() // 加粗
 ```
 
 **图片：**
 
 ```kotlin
 Configs.image()
-	.drawable(drawable) // 本地图片
-	.bitmap(bitmap) // 本地图片
-	.url(imageUrl) // 网络图片
-	.verticalAlign(verticalAlign) // 对齐方式
-	.width(width) // 图片宽度
+  .drawable(drawable) // 本地图片
+  .bitmap(bitmap) // 本地图片
+  .url(imageUrl) // 网络图片
+  .verticalAlign(verticalAlign) // 对齐方式
+  .width(width) // 图片宽度
 ```
 
 
@@ -66,17 +66,17 @@ val msg = "对不起，因您已注册的{$}，我们需要核实您的身份{$}
 
 
 Spans.placeholder(msg)
-	// 使用指定的富文本替换第0个占位符
-	.with("188****8888",config1)
-	// 使用指定的富文本替换第1个占位符
-	.with("199****9999",config2)
-	// 使用图片替换第2个占位符
-	.withImage(config3)
-	// 使用图片替换第3个占位符
-	.withImage(config4)
-	// 指定图片加载器
-	.loader(GlideImageLoader())
-	.into(tvMsg)
+  // 使用指定的富文本替换第0个占位符
+  .with("188****8888",config1)
+  // 使用指定的富文本替换第1个占位符
+  .with("199****9999",config2)
+  // 使用图片替换第2个占位符
+  .withImage(config3)
+  // 使用图片替换第3个占位符
+  .withImage(config4)
+  // 指定图片加载器
+  .loader(GlideImageLoader())
+  .into(tvMsg)
 ```
 
 最终效果如下：
