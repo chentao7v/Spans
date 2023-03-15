@@ -13,16 +13,16 @@ interface Flow<T extends Flow<T>> {
   /**
    * @see Engine#setImageLoader(SpanImageLoader)
    */
-  public T loader(@NonNull SpanImageLoader loader);
+  T loader(@NonNull SpanImageLoader loader);
 
   /**
    * @see Engine#execute()
    */
-  public Spannable execute();
+  Spannable execute();
 
   /**
    * @see Engine#inject(TextView)
    */
-  public void into(TextView textView);
+  void into(TextView textView);
 
 }
