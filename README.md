@@ -1,13 +1,47 @@
 # Spans
+
 在 Android 项目中，将一段普通的文本转换为富文本，需要通过`Spannable#setSpan`来实现。但现有框架中，Span 的使用相对复杂，使用过程中存在大量的模板代码。
-
-
 
 `Spans`框架针对上述痛点，封装了常用的`Span`，可方便快速的完成文本中的某一段子文本的颜色、大小、点击事件、加粗等配置，剩下的就交给`Spans` 去实现。
 
 
 
-`Spans`也支持在文本中添加图片，不管是本地图片还是网络图片，只要配置好了，底层就会自动去加载。当然，针对网络图片，需要您自己去实现一个图片加载器`SpanImageLoader`，并将加载结果给到`Spans`框架，`Spans`便可以在网络图片加载完成后自动将图片添加到指定位置。具体可以参考示例`GlideImageLoader`。
+## 如何使用
+
+在 `build.gradle`  中添加：
+
+```groovy
+implementation 'io.github.chentao7v:spans:1.0.2'
+```
+
+
+
+## 支持的富文本配置
+
+### 文字
+
+```kotlin
+Configs.text()
+	.color(color) // 颜色
+	.size(textSize) // 大小
+	.click { clickEvent... } // 点击事件
+	.bold() // 加粗
+```
+
+
+
+### 图片
+
+```kotlin
+Configs.image()
+	.drawable(drawable) // 本地图片
+	.bitmap(bitmap) // 本地图片
+	.url(imageUrl) // 网络图片
+	.verticalAlign(verticalAlign) // 对齐方式
+	.width(width) // 图片宽度
+```
+
+`Spans`支持在文本中添加图片，不管是本地图片还是网络图片，只要配置好了，底层就会自动去加载。当然，针对网络图片，需要您自己去实现一个图片加载器`SpanImageLoader`，并将加载结果给到`Spans`框架，`Spans`便可以在网络图片加载完成后自动将图片添加到指定位置。具体可以参考示例`GlideImageLoader`。
 
 ```kotlin
 class GlideImageLoader : SpanImageLoader {
@@ -35,10 +69,6 @@ class GlideImageLoader : SpanImageLoader {
 }
 ```
 
-
-
-
-
 如果您对图片的居中方式有要求，`Spans`提供了3种对齐方式供您选择：`BASELINE`、`BOTTOM`、`CENTER`。
 
 - BASELINE：图片的baseline和文字的baseline对齐。图片的baseline是基于文字的baseline模拟的。
@@ -46,43 +76,6 @@ class GlideImageLoader : SpanImageLoader {
 - CENTER：图片的中心和文字的中心对齐，图片居中。
 
 这三种对齐方式也都适配的行高，可以放心使用。
-
-
-
-
-
-## 使用方法
-
-在 `build.gradle`  中添加：
-
-```groovy
-implementation 'io.github.chentao7v:spans:1.0.2'
-```
-
-
-
-## 支持的富文本配置
-
-### 文字
-
-```kotlin
-Configs.text()
-	.color(color) // 颜色
-	.size(textSize) // 大小
-	.click { clickEvent... } // 点击事件
-	.bold() // 加粗
-```
-
-### 图片
-
-```kotlin
-Configs.image()
-	.drawable(drawable) // 本地图片
-	.bitmap(bitmap) // 本地图片
-	.url(imageUrl) // 网络图片
-	.verticalAlign(verticalAlign) // 对齐方式
-	.width(width) // 图片宽度
-```
 
 
 
